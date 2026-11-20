@@ -1,0 +1,442 @@
+{
+  "generated_at": "2026-10-29T09:59:46",
+  "datasets": [
+    {
+      "name": "HotpotQA distractor (70 questions)",
+      "kind": "public",
+      "num_questions": 70,
+      "num_dropped": 0,
+      "num_documents": 698,
+      "num_chunks": 698,
+      "chunk_size": 600,
+      "overlap": 100,
+      "headline_k": 5,
+      "embedding": {
+        "provider": "gemini",
+        "model": "gemini-embedding-001",
+        "dimension": 3072
+      },
+      "avg_query_embedding_ms": 0.0,
+      "systems": [
+        {
+          "name": "Dense (FAISS)",
+          "mode": "dense",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": false,
+          "recall_at_k": 0.9429,
+          "all_gold_at_k": 0.8857,
+          "mrr": 0.956,
+          "recall_by_k": {
+            "1": 0.4643,
+            "3": 0.9,
+            "5": 0.9429,
+            "10": 0.9786
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.8143,
+            "5": 0.8857,
+            "10": 0.9571
+          },
+          "all_gold_by_type": {
+            "comparison": 1.0,
+            "bridge": 0.84
+          },
+          "avg_latency_ms": 0.53,
+          "p95_latency_ms": 0.814,
+          "avg_context_tokens": 501.5
+        },
+        {
+          "name": "BM25 (keywords)",
+          "mode": "bm25",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": false,
+          "recall_at_k": 0.7071,
+          "all_gold_at_k": 0.4714,
+          "mrr": 0.8616,
+          "recall_by_k": {
+            "1": 0.3929,
+            "3": 0.6214,
+            "5": 0.7071,
+            "10": 0.8857
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.3143,
+            "5": 0.4714,
+            "10": 0.7714
+          },
+          "all_gold_by_type": {
+            "comparison": 0.75,
+            "bridge": 0.36
+          },
+          "avg_latency_ms": 0.851,
+          "p95_latency_ms": 0.453,
+          "avg_context_tokens": 498.8
+        },
+        {
+          "name": "Hybrid 1:1 (plain RRF)",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 1.0,
+          "rerank": false,
+          "recall_at_k": 0.8429,
+          "all_gold_at_k": 0.6857,
+          "mrr": 0.931,
+          "recall_by_k": {
+            "1": 0.4357,
+            "3": 0.7714,
+            "5": 0.8429,
+            "10": 0.9429
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.5429,
+            "5": 0.6857,
+            "10": 0.8857
+          },
+          "all_gold_by_type": {
+            "comparison": 1.0,
+            "bridge": 0.56
+          },
+          "avg_latency_ms": 0.727,
+          "p95_latency_ms": 1.217,
+          "avg_context_tokens": 491.9
+        },
+        {
+          "name": "Hybrid 1:0.5",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 0.5,
+          "rerank": false,
+          "recall_at_k": 0.9071,
+          "all_gold_at_k": 0.8143,
+          "mrr": 0.95,
+          "recall_by_k": {
+            "1": 0.4571,
+            "3": 0.8143,
+            "5": 0.9071,
+            "10": 0.9429
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.6286,
+            "5": 0.8143,
+            "10": 0.8857
+          },
+          "all_gold_by_type": {
+            "comparison": 1.0,
+            "bridge": 0.74
+          },
+          "avg_latency_ms": 0.593,
+          "p95_latency_ms": 1.155,
+          "avg_context_tokens": 485.0
+        },
+        {
+          "name": "Hybrid 1:0.25",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 0.25,
+          "rerank": false,
+          "recall_at_k": 0.9143,
+          "all_gold_at_k": 0.8286,
+          "mrr": 0.9631,
+          "recall_by_k": {
+            "1": 0.4714,
+            "3": 0.8357,
+            "5": 0.9143,
+            "10": 0.9571
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.6857,
+            "5": 0.8286,
+            "10": 0.9143
+          },
+          "all_gold_by_type": {
+            "comparison": 1.0,
+            "bridge": 0.76
+          },
+          "avg_latency_ms": 0.579,
+          "p95_latency_ms": 0.966,
+          "avg_context_tokens": 497.8
+        },
+        {
+          "name": "Dense + rerank",
+          "mode": "dense",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": true,
+          "recall_at_k": 0.8857,
+          "all_gold_at_k": 0.7714,
+          "mrr": 0.975,
+          "recall_by_k": {
+            "1": 0.4786,
+            "3": 0.8,
+            "5": 0.8857,
+            "10": 0.95
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.6143,
+            "5": 0.7714,
+            "10": 0.9
+          },
+          "all_gold_by_type": {
+            "comparison": 0.95,
+            "bridge": 0.7
+          },
+          "avg_latency_ms": 537.77,
+          "p95_latency_ms": 984.975,
+          "avg_context_tokens": 508.9
+        },
+        {
+          "name": "Hybrid 1:1 + rerank",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 1.0,
+          "rerank": true,
+          "recall_at_k": 0.8786,
+          "all_gold_at_k": 0.7571,
+          "mrr": 0.975,
+          "recall_by_k": {
+            "1": 0.4786,
+            "3": 0.7786,
+            "5": 0.8786,
+            "10": 0.9286
+          },
+          "all_gold_by_k": {
+            "1": 0.0,
+            "3": 0.5714,
+            "5": 0.7571,
+            "10": 0.8571
+          },
+          "all_gold_by_type": {
+            "comparison": 0.95,
+            "bridge": 0.68
+          },
+          "avg_latency_ms": 563.756,
+          "p95_latency_ms": 896.905,
+          "avg_context_tokens": 503.3
+        }
+      ]
+    },
+    {
+      "name": "Own documents",
+      "kind": "own",
+      "num_questions": 34,
+      "num_dropped": 0,
+      "num_documents": 5,
+      "num_chunks": 38,
+      "chunk_size": 600,
+      "overlap": 100,
+      "headline_k": 5,
+      "embedding": {
+        "provider": "gemini",
+        "model": "gemini-embedding-001",
+        "dimension": 3072
+      },
+      "avg_query_embedding_ms": 0.0,
+      "systems": [
+        {
+          "name": "Dense (FAISS)",
+          "mode": "dense",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": false,
+          "recall_at_k": 0.7647,
+          "all_gold_at_k": 0.7647,
+          "mrr": 0.5415,
+          "recall_by_k": {
+            "1": 0.3824,
+            "3": 0.5882,
+            "5": 0.7647,
+            "10": 0.9118
+          },
+          "all_gold_by_k": {
+            "1": 0.3824,
+            "3": 0.5882,
+            "5": 0.7647,
+            "10": 0.9118
+          },
+          "all_gold_by_type": {
+            "factual": 0.7647
+          },
+          "avg_latency_ms": 0.092,
+          "p95_latency_ms": 0.155,
+          "avg_context_tokens": 2756.6
+        },
+        {
+          "name": "BM25 (keywords)",
+          "mode": "bm25",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": false,
+          "recall_at_k": 0.8235,
+          "all_gold_at_k": 0.8235,
+          "mrr": 0.6479,
+          "recall_by_k": {
+            "1": 0.5294,
+            "3": 0.7353,
+            "5": 0.8235,
+            "10": 0.9706
+          },
+          "all_gold_by_k": {
+            "1": 0.5294,
+            "3": 0.7353,
+            "5": 0.8235,
+            "10": 0.9706
+          },
+          "all_gold_by_type": {
+            "factual": 0.8235
+          },
+          "avg_latency_ms": 0.5,
+          "p95_latency_ms": 0.459,
+          "avg_context_tokens": 2746.2
+        },
+        {
+          "name": "Hybrid 1:1 (plain RRF)",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 1.0,
+          "rerank": false,
+          "recall_at_k": 0.8824,
+          "all_gold_at_k": 0.8824,
+          "mrr": 0.5616,
+          "recall_by_k": {
+            "1": 0.3529,
+            "3": 0.7647,
+            "5": 0.8824,
+            "10": 1.0
+          },
+          "all_gold_by_k": {
+            "1": 0.3529,
+            "3": 0.7647,
+            "5": 0.8824,
+            "10": 1.0
+          },
+          "all_gold_by_type": {
+            "factual": 0.8824
+          },
+          "avg_latency_ms": 0.136,
+          "p95_latency_ms": 0.262,
+          "avg_context_tokens": 2749.1
+        },
+        {
+          "name": "Hybrid 1:0.5",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 0.5,
+          "rerank": false,
+          "recall_at_k": 0.8235,
+          "all_gold_at_k": 0.8235,
+          "mrr": 0.5513,
+          "recall_by_k": {
+            "1": 0.3529,
+            "3": 0.7059,
+            "5": 0.8235,
+            "10": 1.0
+          },
+          "all_gold_by_k": {
+            "1": 0.3529,
+            "3": 0.7059,
+            "5": 0.8235,
+            "10": 1.0
+          },
+          "all_gold_by_type": {
+            "factual": 0.8235
+          },
+          "avg_latency_ms": 0.131,
+          "p95_latency_ms": 0.21,
+          "avg_context_tokens": 2765.5
+        },
+        {
+          "name": "Hybrid 1:0.25",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 0.25,
+          "rerank": false,
+          "recall_at_k": 0.8235,
+          "all_gold_at_k": 0.8235,
+          "mrr": 0.5651,
+          "recall_by_k": {
+            "1": 0.3824,
+            "3": 0.6765,
+            "5": 0.8235,
+            "10": 0.9412
+          },
+          "all_gold_by_k": {
+            "1": 0.3824,
+            "3": 0.6765,
+            "5": 0.8235,
+            "10": 0.9412
+          },
+          "all_gold_by_type": {
+            "factual": 0.8235
+          },
+          "avg_latency_ms": 0.108,
+          "p95_latency_ms": 0.155,
+          "avg_context_tokens": 2744.5
+        },
+        {
+          "name": "Dense + rerank",
+          "mode": "dense",
+          "dense_weight": null,
+          "bm25_weight": null,
+          "rerank": true,
+          "recall_at_k": 0.7059,
+          "all_gold_at_k": 0.7059,
+          "mrr": 0.5273,
+          "recall_by_k": {
+            "1": 0.4118,
+            "3": 0.5588,
+            "5": 0.7059,
+            "10": 0.8529
+          },
+          "all_gold_by_k": {
+            "1": 0.4118,
+            "3": 0.5588,
+            "5": 0.7059,
+            "10": 0.8529
+          },
+          "all_gold_by_type": {
+            "factual": 0.7059
+          },
+          "avg_latency_ms": 967.482,
+          "p95_latency_ms": 998.275,
+          "avg_context_tokens": 2729.0
+        },
+        {
+          "name": "Hybrid 1:1 + rerank",
+          "mode": "hybrid",
+          "dense_weight": 1.0,
+          "bm25_weight": 1.0,
+          "rerank": true,
+          "recall_at_k": 0.7353,
+          "all_gold_at_k": 0.7353,
+          "mrr": 0.5298,
+          "recall_by_k": {
+            "1": 0.4118,
+            "3": 0.5588,
+            "5": 0.7353,
+            "10": 0.8529
+          },
+          "all_gold_by_k": {
+            "1": 0.4118,
+            "3": 0.5588,
+            "5": 0.7353,
+            "10": 0.8529
+          },
+          "all_gold_by_type": {
+            "factual": 0.7353
+          },
+          "avg_latency_ms": 992.471,
+          "p95_latency_ms": 1006.846,
+          "avg_context_tokens": 2731.8
+        }
+      ]
+    }
+  ]
+}

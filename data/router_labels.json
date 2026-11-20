@@ -1,0 +1,1606 @@
+{
+    "labels": [
+        "local",
+        "global",
+        "hybrid"
+    ],
+    "description": "Route labels: local = one specific fact (vector search); global = broad/thematic/summary/comparison (graph); hybrid = connects specific entities or needs several linked facts (vector + graph).",
+    "train": [
+        {
+            "query": "What is the dimension of the embedding vectors?",
+            "label": "local"
+        },
+        {
+            "query": "Who wrote the report?",
+            "label": "local"
+        },
+        {
+            "query": "When was the company founded?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the course coordinator?",
+            "label": "local"
+        },
+        {
+            "query": "How many chunks does the document contain?",
+            "label": "local"
+        },
+        {
+            "query": "Which programming languages are listed in the resume?",
+            "label": "local"
+        },
+        {
+            "query": "Which university did the candidate graduate from?",
+            "label": "local"
+        },
+        {
+            "query": "Define quorum.",
+            "label": "local"
+        },
+        {
+            "query": "What does FLP stand for?",
+            "label": "local"
+        },
+        {
+            "query": "What is the value of k used in top-k retrieval?",
+            "label": "local"
+        },
+        {
+            "query": "What was the total revenue in 2023?",
+            "label": "local"
+        },
+        {
+            "query": "Where is the author based?",
+            "label": "local"
+        },
+        {
+            "query": "What is the email address given in the document?",
+            "label": "local"
+        },
+        {
+            "query": "How long is the lease term?",
+            "label": "local"
+        },
+        {
+            "query": "What is the penalty for late payment?",
+            "label": "local"
+        },
+        {
+            "query": "Which clustering algorithm does the paper use?",
+            "label": "local"
+        },
+        {
+            "query": "What batch size was used during training?",
+            "label": "local"
+        },
+        {
+            "query": "What is the enrollment number of the student?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the CEO mentioned in the text?",
+            "label": "local"
+        },
+        {
+            "query": "What is the interest rate in the loan agreement?",
+            "label": "local"
+        },
+        {
+            "query": "How many replicas does PBFT need to tolerate one faulty node?",
+            "label": "local"
+        },
+        {
+            "query": "What is the default port number?",
+            "label": "local"
+        },
+        {
+            "query": "Which database is used to store the user records?",
+            "label": "local"
+        },
+        {
+            "query": "What is the deadline for submitting the assignment?",
+            "label": "local"
+        },
+        {
+            "query": "Name the author of the cited 1991 paper.",
+            "label": "local"
+        },
+        {
+            "query": "What is the learning rate?",
+            "label": "local"
+        },
+        {
+            "query": "How many employees does the company have?",
+            "label": "local"
+        },
+        {
+            "query": "What is the candidate's phone number?",
+            "label": "local"
+        },
+        {
+            "query": "Which year was the protocol first published?",
+            "label": "local"
+        },
+        {
+            "query": "What does the acronym RAG stand for?",
+            "label": "local"
+        },
+        {
+            "query": "What is the total cost listed in the invoice?",
+            "label": "local"
+        },
+        {
+            "query": "What GPA does the candidate report?",
+            "label": "local"
+        },
+        {
+            "query": "Who signed the contract?",
+            "label": "local"
+        },
+        {
+            "query": "What is the file size limit for uploads?",
+            "label": "local"
+        },
+        {
+            "query": "In which city was the conference held?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the index type used by FAISS?",
+            "label": "local"
+        },
+        {
+            "query": "How many pages is the thesis?",
+            "label": "local"
+        },
+        {
+            "query": "What is the passing score for the exam?",
+            "label": "local"
+        },
+        {
+            "query": "What version of Python is required?",
+            "label": "local"
+        },
+        {
+            "query": "Which company did the candidate work for in 2022?",
+            "label": "local"
+        },
+        {
+            "query": "What is the exact wording of the termination clause?",
+            "label": "local"
+        },
+        {
+            "query": "Give the definition of a knowledge graph.",
+            "label": "local"
+        },
+        {
+            "query": "What is the maximum token length per chunk?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the supervisor of the project?",
+            "label": "local"
+        },
+        {
+            "query": "What temperature setting was used for generation?",
+            "label": "local"
+        },
+        {
+            "query": "What is the project title?",
+            "label": "local"
+        },
+        {
+            "query": "What is the date of the meeting?",
+            "label": "local"
+        },
+        {
+            "query": "Which framework does the backend use?",
+            "label": "local"
+        },
+        {
+            "query": "How much was the grant amount?",
+            "label": "local"
+        },
+        {
+            "query": "What is the model name used for embeddings?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the first author of the paper?",
+            "label": "local"
+        },
+        {
+            "query": "What is the warranty period?",
+            "label": "local"
+        },
+        {
+            "query": "What is the minimum password length?",
+            "label": "local"
+        },
+        {
+            "query": "How many layers does the neural network have?",
+            "label": "local"
+        },
+        {
+            "query": "What is the street address of the office?",
+            "label": "local"
+        },
+        {
+            "query": "List the skills in the skills section.",
+            "label": "local"
+        },
+        {
+            "query": "What year did the candidate complete the B.Tech degree?",
+            "label": "local"
+        },
+        {
+            "query": "What was the accuracy reported in Table 2?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the dataset used?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the contact person for support?",
+            "label": "local"
+        },
+        {
+            "query": "What does the abbreviation GCMMF mean?",
+            "label": "local"
+        },
+        {
+            "query": "What is the cutoff score for eligibility?",
+            "label": "local"
+        },
+        {
+            "query": "How many nodes are in the cluster?",
+            "label": "local"
+        },
+        {
+            "query": "What is the interest on the fixed deposit?",
+            "label": "local"
+        },
+        {
+            "query": "Which cloud provider hosts the application?",
+            "label": "local"
+        },
+        {
+            "query": "What is the policy number?",
+            "label": "local"
+        },
+        {
+            "query": "What is the patient's age listed in the report?",
+            "label": "local"
+        },
+        {
+            "query": "Which section describes the evaluation metrics?",
+            "label": "local"
+        },
+        {
+            "query": "What is the title of chapter three?",
+            "label": "local"
+        },
+        {
+            "query": "What is the license of the library?",
+            "label": "local"
+        },
+        {
+            "query": "What is the timeout value in seconds?",
+            "label": "local"
+        },
+        {
+            "query": "What is the tax rate applied?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the author of this resume?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the person in this document?",
+            "label": "local"
+        },
+        {
+            "query": "What is the expiry date of the certificate?",
+            "label": "local"
+        },
+        {
+            "query": "How many references are cited?",
+            "label": "local"
+        },
+        {
+            "query": "What dosage is recommended in the guideline?",
+            "label": "local"
+        },
+        {
+            "query": "Which operating system does the software support?",
+            "label": "local"
+        },
+        {
+            "query": "What is the price per unit?",
+            "label": "local"
+        },
+        {
+            "query": "What are the candidate's hobbies?",
+            "label": "local"
+        },
+        {
+            "query": "Applicant's name?",
+            "label": "local"
+        },
+        {
+            "query": "Date of issue?",
+            "label": "local"
+        },
+        {
+            "query": "Total price?",
+            "label": "local"
+        },
+        {
+            "query": "Contact email?",
+            "label": "local"
+        },
+        {
+            "query": "Page count?",
+            "label": "local"
+        },
+        {
+            "query": "Author name",
+            "label": "local"
+        },
+        {
+            "query": "Course title?",
+            "label": "local"
+        },
+        {
+            "query": "Which city?",
+            "label": "local"
+        },
+        {
+            "query": "Company name",
+            "label": "local"
+        },
+        {
+            "query": "Policy expiry date?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the guide?",
+            "label": "local"
+        },
+        {
+            "query": "Invoice number?",
+            "label": "local"
+        },
+        {
+            "query": "What is the exact figure reported for net profit in the financial statement for the fiscal year ended March 2023 as shown in the third table?",
+            "label": "local"
+        },
+        {
+            "query": "According to the agreement signed in January between the tenant and the landlord, what is the monthly rent that must be paid before the fifth of each month?",
+            "label": "local"
+        },
+        {
+            "query": "In the experimental setup described in the third section of the paper, which optimizer and what initial learning rate were used for fine-tuning the model?",
+            "label": "local"
+        },
+        {
+            "query": "Which specific version of the library does the installation guide on the first page recommend for production deployment on Linux servers?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the person listed as the corresponding author on the first page of the paper along with their institutional email address?",
+            "label": "local"
+        },
+        {
+            "query": "On which exact date was the purchase order issued to the supplier and what was the total quantity ordered?",
+            "label": "local"
+        },
+        {
+            "query": "What was the diagnosis code written in the discharge summary of the patient admitted in February?",
+            "label": "local"
+        },
+        {
+            "query": "How many students from the second semester are listed as having completed the project according to the attendance register?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the head of the department who signed the certificate issued at the end of the course?",
+            "label": "local"
+        },
+        {
+            "query": "Which section of the policy document states the maximum number of leave days an employee can take in one year?",
+            "label": "local"
+        },
+        {
+            "query": "What is the registration number printed at the top right corner of the certificate that was awarded to the participant?",
+            "label": "local"
+        },
+        {
+            "query": "In the table of results for the second experiment, what is the exact value reported for recall?",
+            "label": "local"
+        },
+        {
+            "query": "Summarize the whole document.",
+            "label": "global"
+        },
+        {
+            "query": "What is this document about?",
+            "label": "global"
+        },
+        {
+            "query": "Give me an overview of the main themes.",
+            "label": "global"
+        },
+        {
+            "query": "What are the key takeaways across all the files?",
+            "label": "global"
+        },
+        {
+            "query": "Compare the approaches discussed in the papers.",
+            "label": "global"
+        },
+        {
+            "query": "What are the major trends described in the report?",
+            "label": "global"
+        },
+        {
+            "query": "How do the different consensus protocols differ in their failure assumptions?",
+            "label": "global"
+        },
+        {
+            "query": "What are the overall strengths and weaknesses of the proposed system?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the general architecture of the platform.",
+            "label": "global"
+        },
+        {
+            "query": "What recurring challenges do the documents mention?",
+            "label": "global"
+        },
+        {
+            "query": "Give a high-level summary of the project.",
+            "label": "global"
+        },
+        {
+            "query": "What are the main topics covered in this collection?",
+            "label": "global"
+        },
+        {
+            "query": "Provide a comprehensive overview of the company's strategy.",
+            "label": "global"
+        },
+        {
+            "query": "What are the common themes across the interviews?",
+            "label": "global"
+        },
+        {
+            "query": "Explain the broad landscape of vector search techniques.",
+            "label": "global"
+        },
+        {
+            "query": "What are the main conclusions of the study?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the key findings of all the reports.",
+            "label": "global"
+        },
+        {
+            "query": "Contrast the different design philosophies presented.",
+            "label": "global"
+        },
+        {
+            "query": "What is the overall message of the document?",
+            "label": "global"
+        },
+        {
+            "query": "Outline the big picture of how the system works.",
+            "label": "global"
+        },
+        {
+            "query": "What are the trade-offs between the approaches described?",
+            "label": "global"
+        },
+        {
+            "query": "Give me the gist of these documents.",
+            "label": "global"
+        },
+        {
+            "query": "What are the main risks discussed across the files?",
+            "label": "global"
+        },
+        {
+            "query": "How would you characterize the tone and argument of the whole text?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the candidate's profile.",
+            "label": "global"
+        },
+        {
+            "query": "What general lessons can be drawn from the case studies?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the evolution of the field as presented in the papers.",
+            "label": "global"
+        },
+        {
+            "query": "Compare the strengths of the different methods covered.",
+            "label": "global"
+        },
+        {
+            "query": "What are all the important points in the document?",
+            "label": "global"
+        },
+        {
+            "query": "Provide a brief synopsis of every file.",
+            "label": "global"
+        },
+        {
+            "query": "What topics does the corpus focus on the most?",
+            "label": "global"
+        },
+        {
+            "query": "What are the overarching goals of the organization?",
+            "label": "global"
+        },
+        {
+            "query": "How do the sections of the document fit together?",
+            "label": "global"
+        },
+        {
+            "query": "Give an executive summary.",
+            "label": "global"
+        },
+        {
+            "query": "What are the broad categories of problems addressed?",
+            "label": "global"
+        },
+        {
+            "query": "Discuss the advantages and disadvantages of the techniques in the corpus.",
+            "label": "global"
+        },
+        {
+            "query": "What patterns appear across the different datasets?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the methodology used throughout the paper.",
+            "label": "global"
+        },
+        {
+            "query": "What are the main differences between the two approaches overall?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the general findings about performance.",
+            "label": "global"
+        },
+        {
+            "query": "Explain the themes that connect all of these documents.",
+            "label": "global"
+        },
+        {
+            "query": "What is the general consensus among the authors?",
+            "label": "global"
+        },
+        {
+            "query": "Give an overview of the project's achievements.",
+            "label": "global"
+        },
+        {
+            "query": "Which ideas dominate the discussion across the documents?",
+            "label": "global"
+        },
+        {
+            "query": "How does the document as a whole address scalability?",
+            "label": "global"
+        },
+        {
+            "query": "What is the overall structure of the argument?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize everything the documents say about security.",
+            "label": "global"
+        },
+        {
+            "query": "Compare and contrast the main ideas in the files.",
+            "label": "global"
+        },
+        {
+            "query": "What are the principal limitations acknowledged in the work?",
+            "label": "global"
+        },
+        {
+            "query": "Give a thematic analysis of the report.",
+            "label": "global"
+        },
+        {
+            "query": "What is the big-picture story of the company's growth?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the main categories of skills and experience shown.",
+            "label": "global"
+        },
+        {
+            "query": "What are the biggest themes in the feedback?",
+            "label": "global"
+        },
+        {
+            "query": "Write a short overview of the course content.",
+            "label": "global"
+        },
+        {
+            "query": "How do the documents collectively describe the market?",
+            "label": "global"
+        },
+        {
+            "query": "What are the high-level differences between the architectures?",
+            "label": "global"
+        },
+        {
+            "query": "Give a broad summary of the legal obligations described.",
+            "label": "global"
+        },
+        {
+            "query": "Which general principles guide the design?",
+            "label": "global"
+        },
+        {
+            "query": "What does the research as a whole conclude about retrieval quality?",
+            "label": "global"
+        },
+        {
+            "query": "Explain the overall workflow end to end.",
+            "label": "global"
+        },
+        {
+            "query": "What are the key ideas in this paper?",
+            "label": "global"
+        },
+        {
+            "query": "Tell me about this file in general.",
+            "label": "global"
+        },
+        {
+            "query": "What has been discussed in these papers in general?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the strengths and weaknesses across all proposals.",
+            "label": "global"
+        },
+        {
+            "query": "Compare all of the protocols and their trade-offs.",
+            "label": "global"
+        },
+        {
+            "query": "What are the major categories of risk in the corpus?",
+            "label": "global"
+        },
+        {
+            "query": "How do the various components relate at a high level?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the main contributions of the thesis.",
+            "label": "global"
+        },
+        {
+            "query": "What are the dominant research directions mentioned?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the experience and education sections together.",
+            "label": "global"
+        },
+        {
+            "query": "What do the documents say overall about cost?",
+            "label": "global"
+        },
+        {
+            "query": "Give me a landscape of the techniques discussed.",
+            "label": "global"
+        },
+        {
+            "query": "What insights emerge from reading everything together?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize this.",
+            "label": "global"
+        },
+        {
+            "query": "Give me a summary.",
+            "label": "global"
+        },
+        {
+            "query": "Key points?",
+            "label": "global"
+        },
+        {
+            "query": "Brief overview please",
+            "label": "global"
+        },
+        {
+            "query": "What's it about?",
+            "label": "global"
+        },
+        {
+            "query": "Highlights?",
+            "label": "global"
+        },
+        {
+            "query": "Explain the document.",
+            "label": "global"
+        },
+        {
+            "query": "Main ideas?",
+            "label": "global"
+        },
+        {
+            "query": "Recap the document",
+            "label": "global"
+        },
+        {
+            "query": "Short abstract please",
+            "label": "global"
+        },
+        {
+            "query": "Describe the content.",
+            "label": "global"
+        },
+        {
+            "query": "Walk me through the whole document from start to finish.",
+            "label": "global"
+        },
+        {
+            "query": "Could you walk me through the full argument of the paper, from the motivation to the experiments and conclusions, in a few paragraphs?",
+            "label": "global"
+        },
+        {
+            "query": "Please give a detailed description of the entire methodology, including all the stages and how they fit together.",
+            "label": "global"
+        },
+        {
+            "query": "Tell me everything important about the project, its goals, its design and its results.",
+            "label": "global"
+        },
+        {
+            "query": "What are the overall pros and cons of the different storage technologies discussed in the documents?",
+            "label": "global"
+        },
+        {
+            "query": "Compare Java and Go.",
+            "label": "global"
+        },
+        {
+            "query": "Compare React and Vue.",
+            "label": "global"
+        },
+        {
+            "query": "Contrast SQL and NoSQL databases.",
+            "label": "global"
+        },
+        {
+            "query": "Compare Docker and virtual machines.",
+            "label": "global"
+        },
+        {
+            "query": "Give me a complete summary of the report covering the background, the findings and the recommendations.",
+            "label": "global"
+        },
+        {
+            "query": "Explain in detail what the whole course covers and how the modules build on each other.",
+            "label": "global"
+        },
+        {
+            "query": "How does Raft leader election relate to the quorum requirement in Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which projects did the candidate build with FastAPI and what impact did they have?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the 2022 policy change affect the revenue of the dairy division?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why does the FLP result matter for the safety of Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What connects Dr. Joshi's course to the Amul case study?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who approved the budget that funded the FAISS migration and what was the outcome?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does BM25 complement dense retrieval in the hybrid pipeline?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What role did the Louvain algorithm play in building community summaries for the graph?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are Byzantine faults handled differently by PBFT compared with Raft?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which supplier delivered the faulty component and how did that affect the project timeline?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the candidate's internship experience relate to the skills used in the final-year project?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the relationship between the enrollment number and the course the student took?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Explain how the router decision depends on the query confidence and the graph threshold.",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the merger between the two firms change the reporting structure of the finance team?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did the authors choose FAISS over a graph database and how did that affect latency?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who funded the study and how does that relate to the conflict of interest section?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do proposers and acceptors interact with learners in Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What was the impact of the temperature change on the accuracy reported in Table 3?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the knowledge graph connect Leslie Lamport to the Paxos protocol and to state machine replication?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which clause of the contract is linked to the penalty, and what triggers it?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the team use Gemini embeddings together with FAISS, and what trade-offs resulted?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the connection between the farmer cooperative network and the turnover growth reported?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the quorum size influence availability and consistency in the cluster?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which author collaborated with the first author and on which earlier paper?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the chunk overlap setting affect retrieval recall for the cited experiment?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How was the Amul brand equity measured and how does it tie to the cited 1991 paper?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did the migration to Neo4j slow ingestion and which component caused the bottleneck?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which course faculty member supervised the report and what did they recommend?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the loan interest rate and the repayment schedule together determine the total cost?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does Raft log replication guarantee that committed entries are never lost?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What led to the outage and how did the incident response team resolve it?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are entities linked to communities in the graph, and which community contains Raft?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the candidate's role at the first company connect to the achievements listed under projects?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Explain the link between consensus latency and the number of replicas in PBFT.",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who is responsible for the compliance review and how does that relate to the audit findings?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the dense score and the keyword score combine in reciprocal rank fusion?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What did the paper find about the effect of overlap on the reported F1, and who criticized it?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the Raft paper justify its choice of randomized election timeouts relative to Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which datasets were used for the evaluation and how do their sizes affect the reported latency?",
+            "label": "hybrid"
+        },
+        {
+            "query": "In what way did the regulatory change affect both pricing and the product catalogue?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How is the hybrid route chosen when the query mentions two entities and a relationship?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the relationship between the project guide, the team members and the submitted synopsis?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did the retriever return the wrong document and how does the router configuration relate to it?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the findings in section 4 support the claim made in the introduction about token cost?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which executive launched the initiative and how did it influence the quarterly results?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the learned classifier use TF-IDF features and how does that compare with keyword rules?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the link between the checkpoint interval and recovery time in the described system?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the sales team in Gujarat contribute to the national turnover figure?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do Paxos and Raft differ in the way a leader is elected and in what they guarantee?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who maintained the library and how did their decision to change the license affect the product?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does an unreliable network affect both the safety and the liveness of the protocol?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which risk in the register is related to the vendor delay and what mitigation was proposed?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the vector index get updated when a new document is uploaded and when is the graph updated?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which skills in the resume match the requirements of the job description?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the entities in the second community relate to those in the first?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What was the effect of switching the embedding model on the retrieval scores for short queries?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are the course proficiency requirements related to the project the student presented?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why is a majority quorum needed for safety, and how does that interact with network partitions?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What does the author say about the connection between the dataset bias and the model's errors?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the router thresholds interact with the confidence score when two entities are present?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the pandemic influence the supply chain and which suppliers were replaced?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Explain how the benchmark results relate to the cost claims in the abstract.",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which committee reviewed the proposal and how did its feedback change the budget?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the temporal edge interval relate to the entity version stored in the graph?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the regional office results contribute to the annual report conclusions?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the relationship between document chunking and the quality of the generated citations?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does Dr. Laddhu's course feedback connect to the final marks of the student?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are acceptors and quorums related to the safety guarantee of Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the cooperative's pricing model connect to the farmer income described?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did sales drop after the merger?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How is Flask connected to this app?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who mentored the intern that built the dashboard?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What caused the delay in delivery?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does caching affect latency here?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why was the contract terminated?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the audit change the budget?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which vendor caused the outage?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What links the two incidents?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the router decide between FAISS and the graph?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who reviewed the code that introduced the bug?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How is the guide connected to the project?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which employee approved the expense that the auditor flagged, and what happened to the department afterwards?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the number of replicas in the cluster influence the cost and the fault tolerance described in the paper?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the relationship between the teaching assistant who graded the report and the committee that reviewed the appeal?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the decision to change the database in the second quarter influence the latency numbers reported later?",
+            "label": "hybrid"
+        }
+    ],
+    "test": [
+        {
+            "query": "What is the name of the university mentioned?",
+            "label": "local"
+        },
+        {
+            "query": "How many vectors are stored in the index?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the author of the paper?",
+            "label": "local"
+        },
+        {
+            "query": "What is the date of birth of the applicant?",
+            "label": "local"
+        },
+        {
+            "query": "What is the chunk size used?",
+            "label": "local"
+        },
+        {
+            "query": "Which language is the backend written in?",
+            "label": "local"
+        },
+        {
+            "query": "What is the amount due on the invoice?",
+            "label": "local"
+        },
+        {
+            "query": "What does BM25 stand for?",
+            "label": "local"
+        },
+        {
+            "query": "What is the dimension of the Gemini embedding?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the project guide?",
+            "label": "local"
+        },
+        {
+            "query": "What was the F1 score reported for the baseline?",
+            "label": "local"
+        },
+        {
+            "query": "Where was the study conducted?",
+            "label": "local"
+        },
+        {
+            "query": "What is the project deadline?",
+            "label": "local"
+        },
+        {
+            "query": "How many documents were uploaded?",
+            "label": "local"
+        },
+        {
+            "query": "Which country is the headquarters located in?",
+            "label": "local"
+        },
+        {
+            "query": "What is the contact email of the supervisor?",
+            "label": "local"
+        },
+        {
+            "query": "What is the maximum file size allowed?",
+            "label": "local"
+        },
+        {
+            "query": "Which year did the author graduate?",
+            "label": "local"
+        },
+        {
+            "query": "What is the name of the company?",
+            "label": "local"
+        },
+        {
+            "query": "What is the model used for generation?",
+            "label": "local"
+        },
+        {
+            "query": "What is the salary band mentioned?",
+            "label": "local"
+        },
+        {
+            "query": "Give the exact definition of consensus.",
+            "label": "local"
+        },
+        {
+            "query": "Which port does the server use?",
+            "label": "local"
+        },
+        {
+            "query": "What is the title of the second section?",
+            "label": "local"
+        },
+        {
+            "query": "How many authors does the paper have?",
+            "label": "local"
+        },
+        {
+            "query": "What is the percentage increase stated in the summary table?",
+            "label": "local"
+        },
+        {
+            "query": "What is the full form of PBFT?",
+            "label": "local"
+        },
+        {
+            "query": "What is the course code?",
+            "label": "local"
+        },
+        {
+            "query": "What is the phone number of the applicant?",
+            "label": "local"
+        },
+        {
+            "query": "What color is used for the logo?",
+            "label": "local"
+        },
+        {
+            "query": "Can you summarise what these documents are about?",
+            "label": "global"
+        },
+        {
+            "query": "What are the main ideas discussed in the paper?",
+            "label": "global"
+        },
+        {
+            "query": "Provide an overview of the architecture described in all files.",
+            "label": "global"
+        },
+        {
+            "query": "Compare the main protocols covered and their trade-offs.",
+            "label": "global"
+        },
+        {
+            "query": "What themes run through the interview transcripts?",
+            "label": "global"
+        },
+        {
+            "query": "Give a high-level view of the research contribution.",
+            "label": "global"
+        },
+        {
+            "query": "Describe the overall strategy of the organization.",
+            "label": "global"
+        },
+        {
+            "query": "What are the general strengths and limitations of the approach?",
+            "label": "global"
+        },
+        {
+            "query": "Summarise the experience of the candidate.",
+            "label": "global"
+        },
+        {
+            "query": "What are the common problems mentioned across the reports?",
+            "label": "global"
+        },
+        {
+            "query": "Give me the big picture of the system.",
+            "label": "global"
+        },
+        {
+            "query": "How do the approaches in the corpus differ overall?",
+            "label": "global"
+        },
+        {
+            "query": "What are the most important conclusions across all documents?",
+            "label": "global"
+        },
+        {
+            "query": "Write a short summary of the thesis.",
+            "label": "global"
+        },
+        {
+            "query": "What topics come up repeatedly?",
+            "label": "global"
+        },
+        {
+            "query": "Discuss the overall pros and cons of the techniques presented.",
+            "label": "global"
+        },
+        {
+            "query": "What is the general view of the authors on scalability?",
+            "label": "global"
+        },
+        {
+            "query": "Explain the general workflow described.",
+            "label": "global"
+        },
+        {
+            "query": "What does this document cover?",
+            "label": "global"
+        },
+        {
+            "query": "What are the main categories of findings in the study?",
+            "label": "global"
+        },
+        {
+            "query": "Give an overview of the course material.",
+            "label": "global"
+        },
+        {
+            "query": "How do the documents together describe the industry?",
+            "label": "global"
+        },
+        {
+            "query": "Which broad trends are visible in the data?",
+            "label": "global"
+        },
+        {
+            "query": "Summarize the argument of the whole essay.",
+            "label": "global"
+        },
+        {
+            "query": "What are the key points of this report?",
+            "label": "global"
+        },
+        {
+            "query": "Compare the different methods that were evaluated overall.",
+            "label": "global"
+        },
+        {
+            "query": "Provide a synopsis of the project's goals and outcomes.",
+            "label": "global"
+        },
+        {
+            "query": "What general risks are described in the files?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the landscape of retrieval methods presented.",
+            "label": "global"
+        },
+        {
+            "query": "What are the main takeaways?",
+            "label": "global"
+        },
+        {
+            "query": "How does the leader election in Raft relate to the term numbers stored in the log?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which team built the ingestion module and how did that choice affect query latency?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the connection between the guide's feedback and the changes made to the router?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did the accuracy drop after changing the chunk size, and which dataset showed it most?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the candidate's projects connect to the skills required for the role?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the new pricing affect the farmer cooperative and the retail turnover?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Explain how dense retrieval and keyword retrieval were combined and what the effect on recall was.",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who reviewed the safety section and how did their comments change the protocol description?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the quorum rule in PBFT interact with the number of Byzantine replicas?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How is the community summary for Paxos connected to the entities Lamport and proposer?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What led to the budget overrun and how was it linked to the vendor delay?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the thresholds in the router configuration influence which engine answers a comparative question about two protocols?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the relationship between the author's earlier work and the method proposed in this paper?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which experiment supports the claim about token savings and how large was the effect?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the supervisor's recommendations relate to the final evaluation of the student?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the checkpoint design influence both recovery time and storage cost?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why was the hybrid route selected for the query about Raft and Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are the courses taken by the student connected to the project she presented?",
+            "label": "hybrid"
+        },
+        {
+            "query": "In what way does the temporal validity interval affect the answer about the company's CEO in 2019?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the graph link the dairy cooperative to the national brand strategy?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What is the link between network partitions and the choice of quorum size in the cluster?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Who authored the cited study and how does it support the argument in section two?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the regional sales results feed into the annual conclusions?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do embeddings and the FAISS index work together to answer a pointwise query?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which risk was mitigated by the contractor and how did that change the schedule?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How does the knowledge graph relate the entity Raft to the entity log replication and to Paxos?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How did the merger affect the finance team's reporting and the audit outcome?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What does the paper say about the interplay between overlap and recall for long documents?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which investor funded the pilot and how did the results influence the next round?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How do the candidate's internship and the final-year project jointly demonstrate backend skills?",
+            "label": "hybrid"
+        }
+    ],
+    "hard_test": [
+        {
+            "query": "Summarize.",
+            "label": "global"
+        },
+        {
+            "query": "Overview?",
+            "label": "global"
+        },
+        {
+            "query": "Main points?",
+            "label": "global"
+        },
+        {
+            "query": "tl;dr",
+            "label": "global"
+        },
+        {
+            "query": "What are the themes?",
+            "label": "global"
+        },
+        {
+            "query": "Gist of this paper please",
+            "label": "global"
+        },
+        {
+            "query": "What is the exact total amount on the invoice that was issued to the client on the fourteenth of March according to the second page of the document?",
+            "label": "local"
+        },
+        {
+            "query": "What is the capital of France?",
+            "label": "local"
+        },
+        {
+            "query": "Who is the president of the board in the annual report published last year?",
+            "label": "local"
+        },
+        {
+            "query": "Name?",
+            "label": "local"
+        },
+        {
+            "query": "Phone number",
+            "label": "local"
+        },
+        {
+            "query": "CGPA",
+            "label": "local"
+        },
+        {
+            "query": "How does inflation affect the interest rate set by the central bank?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Why did the CEO resign after the audit?",
+            "label": "hybrid"
+        },
+        {
+            "query": "How are Python and Django related in this project?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Which teacher guided the student whose project used React?",
+            "label": "hybrid"
+        },
+        {
+            "query": "What links the supplier delay to the missed launch?",
+            "label": "hybrid"
+        },
+        {
+            "query": "Explain how the diet in section 2 relates to the blood sugar results in section 5.",
+            "label": "hybrid"
+        },
+        {
+            "query": "Compare Python and Java.",
+            "label": "global"
+        },
+        {
+            "query": "What are the pros and cons of microservices?",
+            "label": "global"
+        },
+        {
+            "query": "Describe the whole methodology in detail.",
+            "label": "global"
+        },
+        {
+            "query": "Tell me everything about the candidate.",
+            "label": "global"
+        },
+        {
+            "query": "What programming languages does the candidate know?",
+            "label": "local"
+        },
+        {
+            "query": "How many years of experience does the candidate have?",
+            "label": "local"
+        }
+    ]
+}

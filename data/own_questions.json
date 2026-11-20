@@ -1,0 +1,345 @@
+{
+  "name": "Own documents",
+  "questions": [
+    {
+      "question": "What amount of total operating income did Britannia register during the 2025–26 fiscal year?",
+      "answer": "Britannia generated ₹19,151.59 crore in consolidated revenue from operations.",
+      "evidence": [
+        "It reported consolidated revenue from operations of ₹19,151.59 crore in FY 2025–26."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "According to the background on packaged food, what two jobs does packaging accomplish simultaneously?",
+      "answer": "Packaging protects and delivers the product, and it builds the brand in the shopper's mind.",
+      "evidence": [
+        "Packaging therefore does two jobs at once: it protects and delivers the product, and it builds the brand in the shopper’s mind."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How should query classification paths be designated during AdaptiRAG routing experiments?",
+      "answer": "Categories should be assigned based on which retrieval architecture delivers superior performance, rather than through manual annotation.",
+      "evidence": [
+        "Label routes by which pipeline actually retrieves better, as R2Adapter does, instead of by hand."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "Which evaluation benchmarks are identified for testing RAG and GraphRAG frameworks?",
+      "answer": "HotpotQA, 2WikiMultihopQA, MuSiQue, MultiHop-RAG, and GraphRAG-Bench.",
+      "evidence": [
+        "HotpotQA, 2WikiMultihopQA, MuSiQue, MultiHop-RAG, GraphRAG-Bench"
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does Britannia safeguard its baked goods against dampness and oxygen?",
+      "answer": "Britannia utilizes flexible laminates that serve as a protective layer against moisture and air.",
+      "evidence": [
+        "Britannia uses flexible laminates that act as a barrier to moisture and air, and it has said that its packaging development work aims to use less plastic for the same quantity of product."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What was the purpose of Britannia's “Har Pocket Ab Dustbin” campaign launched in April 2023?",
+      "answer": "The campaign used wrappers instead of products to urge consumers to properly dispose of their waste.",
+      "evidence": [
+        "In April 2023 it launched the “Har Pocket Ab Dustbin” campaign, which used wrappers instead of products to encourage consumers to dispose of waste properly."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What phrase do the researchers use to describe the phenomenon where a system depends on believable yet obsolete context?",
+      "answer": "The authors refer to this phenomenon as \"temporal hallucination.\"",
+      "evidence": [
+        "The authors call the failure 'temporal hallucination': the model relies on plausible but outdated evidence (a yesterday-versus-six-months-old lab value is the running example)."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What MRR gains does Chronofy achieve over static retrieval on the ICEWS14 and GDELT datasets?",
+      "answer": "Chronofy achieves MRR improvements over static retrieval of +9.4% on the ICEWS14 dataset and approximately +48.9% on the GDELT dataset.",
+      "evidence": [
+        "MRR gains over static retrieval: +9.4% on ICEWS14 and about +48.9% on GDELT (the table recomputes to about 48.7%)."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What specific environmental and design drawbacks exist within Britannia's packaging operations?",
+      "answer": "Britannia relies heavily on hard-to-recycle multi-layer flexible plastic, faces skepticism regarding its plastic-neutral offset claims, and displays inconsistent design styles across its various sub-brands.",
+      "evidence": [
+        "Plastic neutrality is an offset and is questioned by some commentators; heavy use of multi-layer flexible plastic, which is hard to recycle; designs across many sub-brands can look different from each other."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What external threats pose risks to Britannia according to the analysis?",
+      "answer": "Britannia faces risks from stricter packaging and Extended Producer Responsibility (EPR) regulations, escalating material costs, premium competitors with eye-catching designs, and consumer skepticism regarding green claims.",
+      "evidence": [
+        "Stricter packaging and EPR rules; rising material costs; premium rivals with striking designs; consumer scepticism about green claims."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What total duration and date range did the community-based placement at Govt. Model Higher Secondary School, Banda entail?",
+      "answer": "The placement lasted 60 hours, taking place from July 13 to July 25, 2026.",
+      "evidence": [
+        "Over the course of 60 hours between 13th July and 25th July 2026, I had the opportunity to introduce students to Artificial Intelligence and Prompt Engineering, covering topics ranging from the basics of AI to its role in education, healthcare, and everyday devices."
+      ],
+      "source": "EN23CS301661_REPORT - Google Docs.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What concepts beyond technical awareness were emphasized during the sessions at Govt. Model Higher Secondary School, Banda?",
+      "answer": "The sessions highlighted digital safety, privacy, and the ethical utilization of AI to ensure students use technology responsibly.",
+      "evidence": [
+        "Beyond technical awareness, the sessions emphasized digital safety, privacy, and the ethical use of AI, equipping students to use technology responsibly."
+      ],
+      "source": "EN23CS301661_REPORT - Google Docs.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What initiative was introduced by Britannia in April 2023, as reported by Indian Television?",
+      "answer": "Britannia introduced the 'Har Pocket Ab Dustbin' campaign.",
+      "evidence": [
+        "Indian Television. (2023, April). Britannia launches ‘Har Pocket Ab Dustbin’ campaign."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "In the Annexure A Consumer Survey Questionnaire, how are respondents instructed to rate each statement?",
+      "answer": "Respondents rate each statement on a numerical scale from 1 (strongly disagree) to 5 (strongly agree).",
+      "evidence": [
+        "Respondents rate each statement from 1 (strongly disagree) to 5 (strongly agree)."
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What is the reason for selecting the standard vanilla option when both graph and vanilla methods are adequate?",
+      "answer": "Vanilla is chosen because it costs less.",
+      "evidence": [
+        "If both are\nsuitable, vanilla is preferred because it is cheaper."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How much faster is the R2Adapter router compared to the LLM-based router?",
+      "answer": "It is about 4.6 times faster.",
+      "evidence": [
+        "The router is about 4.6 times faster than the LLM router (74 ms vs. 16 ms) and beats it on accuracy."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does RAGU compare to competing systems when it comes to retrieving supporting evidence across different factoid tiers?",
+      "answer": "RAGU achieves superior evidence retrieval at all factoid tiers, reaching up to 0.84 compared to under 0.76 for alternative systems.",
+      "evidence": [
+        "RAGU has the highest evidence recall at every factoid level, up to 0.84 versus below 0.76 for the others."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "By how many points does HippoRAG 2 lead in fact retrieval and complex reasoning?",
+      "answer": "HippoRAG 2 leads on fact retrieval by 18.2 points and on complex reasoning by 14.7 points.",
+      "evidence": [
+        "HippoRAG 2 leads on fact retrieval by 18.2 points and on complex reasoning by 14.7."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does AdaptiRAG v1.0 direct different categories of user inquiries to suitable retrieval systems?",
+      "answer": "It utilizes an initial classifier to route specific fact-focused inquiries to a FAISS vector database while guiding overarching conceptual inquiries to a Neo4j graph structure.",
+      "evidence": [
+        "The project adds a pre-retrieval Query Classifier that sends factual queries to a FAISS vector index and thematic queries to a Neo4j graph with Leiden community map-reduce."
+      ],
+      "source": "AdaptiRAG v1.0 Synopsis.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does GraphRAG handle global themes within a document corpus?",
+      "answer": "GraphRAG processes global themes through the use of hierarchical community summaries.",
+      "evidence": [
+        "GraphRAG handles global themes through hierarchical community summaries, but costs 10×–20× more LLM tokens, even on simple factual questions."
+      ],
+      "source": "AdaptiRAG v1.0 Synopsis.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What subject domain does the QA-GraphRAG research paper address, and to what extent was it reviewed in this summary?",
+      "answer": "QA-GraphRAG pertains to query routing and was not read in full.",
+      "evidence": [
+        "QA-GraphRAG (PVLDB vol. 19 issue 9, 2026): relevant to routing; not opened in full."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does the performance of the R2Adapter router compare to an LLM router in terms of latency and graph usage?",
+      "answer": "The R2Adapter router operates in 16 ms compared to 74 ms for an LLM router and uses up to 59% less graph while maintaining comparable accuracy.",
+      "evidence": [
+        "Router 16 ms vs. 74 ms for an LLM router; up to 59% less graph usage with comparable accuracy"
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What are the primary packaging objectives for dairy and cheese items?",
+      "answer": "The key priorities are ensuring food safety and maintaining cold-chain integrity.",
+      "evidence": [
+        "Cheese and dairy | Sealed slices, spreads and chilled packs | Cold-chain integrity, food safety"
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What campaign was launched in April 2023 to encourage correct waste disposal?",
+      "answer": "The “Har Pocket Ab Dustbin” campaign.",
+      "evidence": [
+        "April 2023 | “Har Pocket Ab Dustbin” campaign to encourage correct waste disposal | Advertising trade press"
+      ],
+      "source": "Course_Proficiency_Britannia_Packaging_Brand_Equity.docx",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does RaptorRAG accomplish multi-layered information fetching without building an explicit knowledge graph?",
+      "answer": "RaptorRAG repeatedly clusters text chunks and generates summaries at each level to allow multi-granular retrieval without requiring an explicit knowledge graph.",
+      "evidence": [
+        "Recursively clusters chunks and summarizes each level for multi-granular retrieval, no explicit KG."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does vanilla RAG operate according to the comparative evaluation of RAG and GraphRAG methods?",
+      "answer": "Vanilla RAG chunks text, creates embeddings, and retrieves the top-k items through dense similarity.",
+      "evidence": [
+        "Chunk, embed, retrieve top-k by dense similarity."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What proportion of user queries is addressed by actual time-oriented focus extraction?",
+      "answer": "37.8%",
+      "evidence": [
+        "Ablations use gold timestamps; real temporal-focus extraction covers only 37.8% of questions."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "In rubric-based LLM scoring, how is balanced permutation constructed for an n-point rubric?",
+      "answer": "It builds 2n cyclic orderings so that each score appears equally often in each position.",
+      "evidence": [
+        "Balanced permutation: for an n-point rubric build 2n cyclic orderings so each score appears equally often in each position."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What scalability constraint affects the NetworkX software library when handling large-scale graph structures with multi-million vertices?",
+      "answer": "NetworkX cannot scale up to manage millions of nodes.",
+      "evidence": [
+        "NetworkX does not scale to millions of nodes."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does the Retrieval-and-Structuring (RAS) framework generate knowledge graphs during LLM generation?",
+      "answer": "RAS creates a graph tailored to the specific question at inference time.",
+      "evidence": [
+        "RAS builds a question-specific graph at inference time instead."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "What total amount of time did Nayan Jain spend carrying out his community placement program at Govt. Model Higher Secondary School, Banda?",
+      "answer": "60 hours",
+      "evidence": [
+        "I,  B.D. Gound  ,  Principal,  certify  that  Mr. Nayan  Jain  (Enrollment  No. EN23CS301661  )  of  Department  of  Engineering,  has  undertaken  the  Societal Internship  Program  in  our  school  named  Govt. Model  Higher  Secondary  School, Banda  for a duration of  60 hours  between  13/07/2026  and  25/07/2026  ."
+      ],
+      "source": "EN23CS301661_REPORT - Google Docs.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "Who served as the mentor for Nayan Jain's Societal Internship Report at Medicaps University Indore?",
+      "answer": "Prof. Sandeep Kumar Mathariya",
+      "evidence": [
+        "I hereby declare that the  Societal Internship Report  – 2026  is submitted in partial fulfillment for the award of the degree of Bachelor of Technology in the department of Engineering completed under the Mentorship of Prof. Sandeep Kumar Mathariya of the department of Computer Science and Engineering, Medicaps University Indore."
+      ],
+      "source": "EN23CS301661_REPORT - Google Docs.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does the hybrid selection method determine whether to route a query to standard RAG or GraphRAG?",
+      "answer": "A language model categorizes each incoming query as either factual (forwarding it to standard RAG) or inference-oriented (forwarding it to GraphRAG).",
+      "evidence": [
+        "An LLM labels each query fact-based (send to RAG) or reasoning-based (send to GraphRAG)."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    },
+    {
+      "question": "How does the HippoRAG2 retrieval method extract relevant context from document chunks?",
+      "answer": "HippoRAG2 constructs an entity-linked graph across text chunks, identifies entities relevant to the query, and then retrieves the connected chunks.",
+      "evidence": [
+        "Builds an entity-linked graph over chunks, retrieves query-relevant entities then the connected chunks."
+      ],
+      "source": "researchproject.pdf",
+      "type": "factual",
+      "status": "draft"
+    }
+  ]
+}

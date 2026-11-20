@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   AdaptiRAG design tokens
+   Light theme is the default. Dark theme is applied with data-theme="dark" on <html>.
+   Route colours carry meaning everywhere in the app:
+     local = teal (specific facts), global = indigo (themes), hybrid = amber (connected facts)
+   ========================================================================== */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --ink: #14181f;
+  --ink-2: #3a4351;
+  --muted: #5f6b7a;
+  --faint: #8792a2;
+  --line: #e2e6ec;
+  --line-strong: #cfd5de;
+  --accent: #14181f;
+  --accent-ink: #ffffff;
+  --focus: #4f46e5;
+
+  --local: #14b8a6;
+  --local-ink: #0f766e;
+  --local-bg: #e6f7f4;
+  --global: #6366f1;
+  --global-ink: #4338ca;
+  --global-bg: #eceefe;
+  --hybrid: #f59e0b;
+  --hybrid-ink: #92400e;
+  --hybrid-bg: #fdf3dc;
+
+  --ok: #15803d;
+  --ok-bg: #e3f5e9;
+  --bad: #b42318;
+  --bad-bg: #fde8e6;
+
+  --mark: #fde68a;
+  --mark-ink: #3b2f05;
+  --shadow: 0 1px 2px rgba(20, 24, 31, 0.05), 0 8px 24px -12px rgba(20, 24, 31, 0.18);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d1015;
+  --surface: #141920;
+  --surface-2: #1b212a;
+  --ink: #e9edf2;
+  --ink-2: #c3cad4;
+  --muted: #97a1af;
+  --faint: #6f7a89;
+  --line: #242b35;
+  --line-strong: #323b48;
+  --accent: #e9edf2;
+  --accent-ink: #0d1015;
+  --focus: #818cf8;
+
+  --local: #2dd4bf;
+  --local-ink: #5eead4;
+  --local-bg: #0f2a28;
+  --global: #818cf8;
+  --global-ink: #a5b4fc;
+  --global-bg: #1b1f3d;
+  --hybrid: #fbbf24;
+  --hybrid-ink: #fcd34d;
+  --hybrid-bg: #302408;
+
+  --ok: #4ade80;
+  --ok-bg: #0f2a1a;
+  --bad: #f87171;
+  --bad-bg: #331616;
+
+  --mark: #6b5410;
+  --mark-ink: #fff3c4;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+/* Tailwind v4 utilities for the tokens: bg-bg, bg-surface, text-ink, text-muted, border-line, bg-local-bg ... */
+@theme inline {
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --color-local: var(--local);
+  --color-local-ink: var(--local-ink);
+  --color-local-bg: var(--local-bg);
+  --color-global: var(--global);
+  --color-global-ink: var(--global-ink);
+  --color-global-bg: var(--global-bg);
+  --color-hybrid: var(--hybrid);
+  --color-hybrid-ink: var(--hybrid-ink);
+  --color-hybrid-bg: var(--hybrid-bg);
+
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+}
+
+/* ========== BASE ========== */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--global) 28%, transparent);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* ========== SCROLLBARS ========== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+}
+
+/* ========== ANSWER TYPOGRAPHY ========== */
+.answer {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.passage {
+  font-family: var(--font-serif);
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+mark.term {
+  background: var(--mark);
+  color: var(--mark-ink);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* ========== MOTION ========== */
+@keyframes thinkingDot {
+
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+
+  40% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+.thinking-dot {
+  animation: thinkingDot 1.2s ease-in-out infinite;
+}
+
+.thinking-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.thinking-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.indeterminate {
+  animation: indeterminate 1.4s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 45%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.status-live {
+  animation: statusPulse 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

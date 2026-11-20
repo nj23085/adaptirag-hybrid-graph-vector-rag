@@ -1,0 +1,138 @@
+{
+    "generated_at": "2026-10-28T04:23:22",
+    "train_size": 284,
+    "test_size": 90,
+    "lambda": 0.003,
+    "learned": {
+        "test_accuracy": 0.9667,
+        "train_accuracy": 0.9542,
+        "ci95": [
+            0.9222,
+            1.0
+        ],
+        "per_class": {
+            "local": {
+                "precision": 0.935,
+                "recall": 0.967,
+                "f1": 0.951,
+                "support": 30
+            },
+            "global": {
+                "precision": 0.966,
+                "recall": 0.933,
+                "f1": 0.949,
+                "support": 30
+            },
+            "hybrid": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 30
+            }
+        },
+        "confusion": {
+            "local": {
+                "local": 29,
+                "global": 1,
+                "hybrid": 0
+            },
+            "global": {
+                "local": 2,
+                "global": 28,
+                "hybrid": 0
+            },
+            "hybrid": {
+                "local": 0,
+                "global": 0,
+                "hybrid": 30
+            }
+        }
+    },
+    "keyword": {
+        "test_accuracy": 0.3889,
+        "per_class": {
+            "local": {
+                "precision": 0.353,
+                "recall": 1.0,
+                "f1": 0.522,
+                "support": 30
+            },
+            "global": {
+                "precision": 1.0,
+                "recall": 0.067,
+                "f1": 0.125,
+                "support": 30
+            },
+            "hybrid": {
+                "precision": 1.0,
+                "recall": 0.1,
+                "f1": 0.182,
+                "support": 30
+            }
+        },
+        "confusion": {
+            "local": {
+                "local": 30,
+                "global": 0,
+                "hybrid": 0
+            },
+            "global": {
+                "local": 28,
+                "global": 2,
+                "hybrid": 0
+            },
+            "hybrid": {
+                "local": 27,
+                "global": 0,
+                "hybrid": 3
+            }
+        }
+    },
+    "hard_test": {
+        "size": 24,
+        "learned_accuracy": 0.875,
+        "keyword_accuracy": 0.3333,
+        "misclassified": [
+            {
+                "query": "What is the exact total amount on the invoice that was issued to the client on the fourteenth of March according to the second page of the document?",
+                "true": "local",
+                "predicted": "hybrid"
+            },
+            {
+                "query": "CGPA",
+                "true": "local",
+                "predicted": "global"
+            },
+            {
+                "query": "Which teacher guided the student whose project used React?",
+                "true": "hybrid",
+                "predicted": "local"
+            }
+        ]
+    },
+    "cv_accuracy_by_lambda": {
+        "0.003": 0.8558,
+        "0.01": 0.8276,
+        "0.03": 0.7995,
+        "0.1": 0.7363,
+        "0.3": 0.6833,
+        "1.0": 0.5596
+    },
+    "misclassified": [
+        {
+            "query": "Give the exact definition of consensus.",
+            "true": "local",
+            "predicted": "global"
+        },
+        {
+            "query": "Summarise the experience of the candidate.",
+            "true": "global",
+            "predicted": "local"
+        },
+        {
+            "query": "Which broad trends are visible in the data?",
+            "true": "global",
+            "predicted": "local"
+        }
+    ]
+}
