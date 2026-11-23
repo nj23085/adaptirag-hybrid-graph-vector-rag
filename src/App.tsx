@@ -15,10 +15,13 @@ export default function App() {
   const [page, setPage] = useState<'chat' | 'insights'>('chat');
 
   return (
-    <div className="flex h-full flex-col bg-bg text-ink">
+    <div className="relative flex h-full flex-col text-ink antialiased">
+      {/* Ambient background mesh gradient */}
+      <div className="bg-mesh" aria-hidden="true" />
+
       <Header page={page} onNavigate={setPage} apiBase="" />
 
-      <main className="min-h-0 flex-1">
+      <main className="relative z-10 min-h-0 flex-1">
         {/* Chat stays mounted (just hidden) so switching pages does not lose the conversation */}
         <div className={page === 'chat' ? 'h-full' : 'hidden'}>
           <DocumentChatApp currentUser={defaultUser} apiBase="" />

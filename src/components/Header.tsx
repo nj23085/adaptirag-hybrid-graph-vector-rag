@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   page: 'chat' | 'insights';
@@ -10,14 +10,21 @@ interface HeaderProps {
 type Theme = 'light' | 'dark';
 type Backend = 'checking' | 'online' | 'offline';
 
-/** Three coloured paths (local, global, hybrid) converging into one answer. */
-export const LogoMark: React.FC<{ size?: number }> = ({ size = 28 }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-    <rect width="32" height="32" rx="8" fill="var(--ink)" />
-    <path d="M6 8 C14 8 14 16 22 16" stroke="#14b8a6" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-    <path d="M6 16 H22" stroke="#818cf8" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-    <path d="M6 24 C14 24 14 16 22 16" stroke="#fbbf24" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-    <circle cx="24" cy="16" r="3" fill="var(--bg)" />
+/** Three converging paths with distinct vibrant hues */
+export const LogoMark: React.FC<{ size?: number }> = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="shrink-0">
+    <rect width="32" height="32" rx="9" fill="url(#logo-grad)" />
+    <defs>
+      <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0ea5e9" />
+        <stop offset="50%" stopColor="#6366f1" />
+        <stop offset="100%" stopColor="#8b5cf6" />
+      </linearGradient>
+    </defs>
+    <path d="M7 9 C14 9 14 16 22 16" stroke="#22d3ee" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+    <path d="M7 16 H22" stroke="#ffffff" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+    <path d="M7 23 C14 23 14 16 22 16" stroke="#fbbf24" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+    <circle cx="23.5" cy="16" r="2.8" fill="#ffffff" />
   </svg>
 );
 
@@ -59,72 +66,88 @@ export const Header: React.FC<HeaderProps> = ({ page, onNavigate, apiBase = '' }
     setTheme(next);
   };
 
-  const tabs: { id: string; key: 'chat' | 'insights'; label: string; short?: string }[] = [
-    { id: 'nav-chat-btn', key: 'chat', label: 'Ask' },
-    { id: 'nav-insights-btn', key: 'insights', label: 'Efficiency & chunks', short: 'Efficiency' }
+  const tabs: { id: string; key: 'chat' | 'insights'; label: string; short?: string; icon?: React.ReactNode }[] = [
+    { id: 'nav-chat-btn', key: 'chat', label: 'Ask Documents', short: 'Ask' },
+    { id: 'nav-insights-btn', key: 'insights', label: 'Efficiency & Chunks', short: 'Analytics' }
   ];
 
   const statusText =
-    backend === 'online' ? 'Backend online' : backend === 'offline' ? 'Backend offline' : 'Checking backend';
+    backend === 'online' ? 'Backend Live' : backend === 'offline' ? 'Offline' : 'Checking';
 
   return (
-    <header className="sticky top-0 z-30 h-14 shrink-0 border-b border-line bg-surface/90 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
-      <div className="mx-auto flex h-full max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-2.5">
-          <LogoMark />
-          <span className="text-[17px] font-semibold tracking-tight text-ink">AdaptiRAG</span>
+    <header className="sticky top-0 z-40 h-16 shrink-0 border-b border-[var(--border-glass)] bg-surface/85 backdrop-blur-md shadow-sm transition-colors">
+      <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-8">
+        
+        {/* Brand identity */}
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-solid/80 p-1.5 shadow-sm border border-line-strong transition-transform hover:scale-105">
+            <LogoMark />
+          </div>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <span className="text-[19px] font-extrabold tracking-tight brand-gradient-text">
+                AdaptiRAG
+              </span>
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent border border-accent/20">
+                <Sparkles className="h-2.5 w-2.5" />
+                Hybrid AI
+              </span>
+            </div>
+          </div>
         </div>
 
-        <nav className="ml-2 flex h-full items-stretch gap-1 sm:ml-6" aria-label="Main">
-          {tabs.map(t => (
-            <button
-              key={t.key}
-              id={t.id}
-              onClick={() => onNavigate(t.key)}
-              aria-current={page === t.key ? 'page' : undefined}
-              className={`relative flex items-center whitespace-nowrap px-2.5 text-sm font-medium transition-colors sm:px-3.5 ${page === t.key ? 'text-ink' : 'text-muted hover:text-ink'
+        {/* Center pill navigation */}
+        <nav className="flex items-center gap-1 rounded-full border border-line-strong bg-surface-2/80 p-1 shadow-inner backdrop-blur-sm" aria-label="Main">
+          {tabs.map(t => {
+            const active = page === t.key;
+            return (
+              <button
+                key={t.key}
+                id={t.id}
+                onClick={() => onNavigate(t.key)}
+                aria-current={active ? 'page' : undefined}
+                className={`relative rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
+                  active
+                    ? 'brand-btn text-white shadow-md'
+                    : 'text-muted hover:text-ink hover:bg-surface-3/50'
                 }`}
-            >
-              {t.short ? (
-                <>
-                  <span className="sm:hidden">{t.short}</span>
-                  <span className="hidden sm:inline">{t.label}</span>
-                </>
-              ) : (
-                t.label
-              )}
-              {page === t.key && (
-                <span className="absolute inset-x-2.5 bottom-0 h-0.5 rounded-full bg-ink sm:inset-x-3.5" />
-              )}
-            </button>
-          ))}
+              >
+                <span className="sm:hidden">{t.short || t.label}</span>
+                <span className="hidden sm:inline">{t.label}</span>
+              </button>
+            );
+          })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5">
+        {/* Right actions: Status pill + Glass Theme Switcher */}
+        <div className="flex items-center gap-2.5">
           <div
-            className="flex items-center gap-2 rounded-full px-2.5 py-1 text-xs text-muted"
+            className="flex items-center gap-2 rounded-full border border-line bg-surface-2/70 px-3 py-1.5 text-xs font-medium text-muted backdrop-blur-sm"
             role="status"
             aria-live="polite"
           >
             <span
-              className={`h-2 w-2 rounded-full ${backend === 'online'
+              className={`h-2 w-2 rounded-full ${
+                backend === 'online'
                   ? 'bg-ok status-live'
                   : backend === 'offline'
                     ? 'bg-bad'
                     : 'bg-faint'
-                }`}
+              }`}
             />
-            <span className="hidden sm:inline">{statusText}</span>
+            <span className="hidden sm:inline text-ink-2 font-medium">{statusText}</span>
           </div>
+
           <button
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-            title={theme === 'dark' ? 'Light theme' : 'Dark theme'}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-line-strong bg-surface-2/80 text-muted transition-all hover:bg-surface-3 hover:text-ink hover:scale-105 shadow-sm"
           >
-            {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+            {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-slate-700" />}
           </button>
         </div>
+
       </div>
     </header>
   );

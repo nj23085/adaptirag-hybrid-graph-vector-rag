@@ -59,34 +59,37 @@ interface SelectedCitation {
 /* ------------------------------------------------------------------ */
 const ROUTE: Record<
   RouteKey,
-  { label: string; long: string; meaning: string; chip: string; dot: string; bar: string; ink: string }
+  { label: string; long: string; meaning: string; chip: string; dot: string; bar: string; ink: string; iconBg: string }
 > = {
   local: {
     label: 'Local',
-    long: 'Local search',
-    meaning: 'Specific facts from the best matching passages',
-    chip: 'bg-local-bg text-local-ink',
-    dot: 'bg-local',
-    bar: 'bg-local',
-    ink: 'text-local-ink'
+    long: 'Local Vector Search',
+    meaning: 'Specific facts from high-similarity text chunks',
+    chip: 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30',
+    dot: 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]',
+    bar: 'bg-gradient-to-r from-cyan-400 to-teal-500',
+    ink: 'text-cyan-700 dark:text-cyan-300',
+    iconBg: 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400'
   },
   global: {
     label: 'Global',
-    long: 'Global graph',
-    meaning: 'Themes and comparisons across the knowledge graph',
-    chip: 'bg-global-bg text-global-ink',
-    dot: 'bg-global',
-    bar: 'bg-global',
-    ink: 'text-global-ink'
+    long: 'Global Graph Search',
+    meaning: 'High-level themes & concepts across graph communities',
+    chip: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/30',
+    dot: 'bg-purple-500 shadow-[0_0_8px_rgba(139,92,246,0.6)]',
+    bar: 'bg-gradient-to-r from-purple-400 to-indigo-500',
+    ink: 'text-purple-700 dark:text-purple-300',
+    iconBg: 'bg-purple-500/15 text-purple-600 dark:text-purple-400'
   },
   hybrid: {
     label: 'Hybrid',
-    long: 'Hybrid',
-    meaning: 'Passages and graph context together, for facts that connect',
-    chip: 'bg-hybrid-bg text-hybrid-ink',
-    dot: 'bg-hybrid',
-    bar: 'bg-hybrid',
-    ink: 'text-hybrid-ink'
+    long: 'Hybrid Graph + Vector',
+    meaning: 'Unified passages and graph relationships for relational questions',
+    chip: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30',
+    dot: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]',
+    bar: 'bg-gradient-to-r from-amber-400 to-orange-500',
+    ink: 'text-amber-700 dark:text-amber-300',
+    iconBg: 'bg-amber-500/15 text-amber-600 dark:text-amber-400'
   }
 };
 
@@ -162,8 +165,8 @@ const classifierLabel = (c?: string) =>
 /* Small pieces                                                        */
 /* ------------------------------------------------------------------ */
 const RouteChip: React.FC<{ route: RouteKey }> = ({ route }) => (
-  <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[13px] font-medium ${ROUTE[route].chip}`}>
-    <span className={`h-1.5 w-1.5 rounded-full ${ROUTE[route].dot}`} />
+  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-semibold tracking-wide backdrop-blur-sm ${ROUTE[route].chip}`}>
+    <span className={`h-2 w-2 rounded-full ${ROUTE[route].dot}`} />
     {ROUTE[route].long}
   </span>
 );
@@ -173,7 +176,7 @@ const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
   const isError = status === 'error';
   return (
     <span
-      className={`ml-2 shrink-0 rounded px-1.5 py-px text-[11px] font-medium ${isError ? 'bg-bad-bg text-bad' : 'bg-surface-2 text-muted'
+      className={`ml-2 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${isError ? 'bg-bad-bg text-bad border border-bad/30' : 'bg-surface-3 text-muted border border-line-strong'
         }`}
     >
       {isError ? 'error' : status}
@@ -588,144 +591,216 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
   /* UPLOAD VIEW                                                       */
   /* ================================================================ */
   if (view === 'upload') {
-    const routes: { key: RouteKey; title: string; sub: string; example: string }[] = [
+    const routes: { key: RouteKey; title: string; sub: string; example: string; icon: React.ReactNode }[] = [
       {
         key: 'local',
-        title: 'Specific facts',
-        sub: 'Finds the exact passage that holds the answer.',
-        example: 'Who signed the contract?'
+        title: 'Specific Facts',
+        sub: 'PINPOINT FACT EXTRACTION • Pinpoint exact passages & data tables',
+        example: 'Who signed the contract and when?',
+        icon: <BookOpen className="h-5 w-5" />
       },
       {
         key: 'global',
-        title: 'Themes and comparisons',
-        sub: 'Reads across the knowledge graph for the big picture.',
-        example: 'What are the main risks in the report?'
+        title: 'Themes & Summaries',
+        sub: 'KNOWLEDGE GRAPH TRAVERSAL • Cross-document themes & community synthesis',
+        example: 'What are the main organizational risks?',
+        icon: <GitFork className="h-5 w-5" />
       },
       {
         key: 'hybrid',
-        title: 'Facts that connect',
-        sub: 'Combines passages with graph context for linked questions.',
-        example: 'Which supplier provided the part that failed?'
+        title: 'Connected Insights',
+        sub: 'ADAPTIVE MULTI-HOP • Merges deep vectors with relational graph context',
+        example: 'Which supplier provided the part that failed?',
+        icon: <Network className="h-5 w-5" />
       }
     ];
 
     return (
-      <div className="h-full overflow-y-auto">
+      <div className="h-full overflow-y-auto px-4 py-8 sm:px-8 sm:py-12">
         {noticeBar}
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,1fr)_480px] lg:gap-20 lg:py-20">
-          {/* Left: what it does */}
+        <div className="mx-auto max-w-6xl">
+          
+          {/* Top Hero Glass Banner (matching reference site hero-card) */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mb-10 overflow-hidden rounded-3xl border border-[var(--border-glass)] bg-surface/85 backdrop-blur-2xl p-8 sm:p-12 shadow-[var(--shadow)]"
           >
-            <h1 className="max-w-xl text-[34px] font-semibold leading-[1.12] tracking-tight text-ink sm:text-[44px]">
-              Ask your documents. See the evidence.
-            </h1>
-            <p className="mt-5 max-w-lg font-serif text-lg leading-relaxed text-muted">
-              AdaptiRAG reads your file, then chooses the best way to search it for each question and shows exactly
-              which passages the answer came from.
-            </p>
+            {/* Ambient internal orb glow */}
+            <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
-            <div className="mt-10 max-w-xl divide-y divide-line border-y border-line">
-              {routes.map(r => (
-                <div key={r.key} className="flex gap-4 py-4">
-                  <span className={`mt-1 h-10 w-[3px] shrink-0 rounded-full ${ROUTE[r.key].bar}`} />
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-x-3">
-                      <span className="text-[15px] font-semibold text-ink">{r.title}</span>
-                      <span className={`text-[13px] font-medium ${ROUTE[r.key].ink}`}>{ROUTE[r.key].long}</span>
-                    </div>
-                    <p className="mt-0.5 text-sm text-muted">{r.sub}</p>
-                    <p className="mt-1 font-serif text-sm italic text-faint">"{r.example}"</p>
-                  </div>
-                </div>
-              ))}
+            <div className="relative z-10 max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                <span className="h-2 w-2 rounded-full bg-sky-500 animate-ping" />
+                Adaptive Hybrid Graph-Vector RAG
+              </div>
+
+              <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-[54px] leading-[1.12]">
+                <span className="brand-gradient-text">Ask your documents.</span>
+                <br />
+                <span className="text-ink">Inspect the verified evidence.</span>
+              </h1>
+
+              <p className="mt-4 text-base sm:text-lg leading-relaxed text-muted">
+                AdaptiRAG intelligently routes each query to local vector search, global knowledge graph communities,
+                or a hybrid fusion—presenting highlighted evidence passages for every single answer.
+              </p>
             </div>
           </motion.div>
 
-          {/* Right: dropzone and previous documents */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="min-w-0"
-          >
-            <div
-              role="button"
-              tabIndex={0}
-              aria-label="Upload a document"
-              onClick={() => !isUploading && fileInputRef.current?.click()}
-              onKeyDown={e => {
-                if ((e.key === 'Enter' || e.key === ' ') && !isUploading) {
-                  e.preventDefault();
-                  fileInputRef.current?.click();
-                }
-              }}
-              className={`relative flex min-h-[260px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed px-6 py-10 text-center transition-colors ${isDragOver
-                  ? 'border-ink bg-surface-2'
-                  : 'border-line-strong bg-surface hover:border-ink hover:bg-surface-2/60'
-                }`}
+          {/* 2-Column Section: Left Features Grid + Right Dropzone */}
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+            
+            {/* Left: 3 Intelligent Route Cards (.metric-card style from reference) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-4 lg:col-span-7"
             >
-              {fileInput(fileInputRef)}
-              {isUploading ? (
-                <div className="w-full max-w-xs">
-                  <p className="truncate text-[15px] font-medium text-ink">{uploadProgress}</p>
-                  <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-surface-2">
-                    <div className="indeterminate h-full w-1/3 rounded-full bg-ink" />
-                  </div>
-                  <p className="mt-3 text-sm text-muted">Extracting text, splitting into chunks and embedding them.</p>
-                </div>
-              ) : (
-                <>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-2 text-ink">
-                    <Upload className="h-5 w-5" />
-                  </span>
-                  <p className="mt-4 text-[17px] font-semibold text-ink">
-                    {isDragOver ? 'Drop to upload' : 'Drop a document here'}
-                  </p>
-                  <p className="mt-1 text-sm text-muted">or click to choose a file</p>
-                  <p className="mt-5 text-[13px] text-faint">PDF, DOCX, TXT or Markdown</p>
-                </>
-              )}
-            </div>
+              <h2 className="text-base font-bold uppercase tracking-wider text-muted">
+                3 Adaptive Search Pathways
+              </h2>
 
-            {allDocs.length > 0 && (
-              <div className="mt-8">
-                <h2 className="text-sm font-semibold text-ink">Previous documents</h2>
-                <ul className="mt-2 divide-y divide-line border-y border-line">
-                  {(showAllPrev ? allDocs : allDocs.slice(0, 5)).map(doc => (
-                    <li key={doc.id}>
-                      <button
-                        onClick={() => switchToDoc(doc)}
-                        className="group flex w-full items-center gap-3 px-1 py-3 text-left transition-colors hover:bg-surface-2/60"
-                      >
-                        <FileText className="h-4 w-4 shrink-0 text-faint" />
-                        <span className="min-w-0 flex-1">
-                          <span className="flex items-center">
-                            <span className="truncate text-sm font-medium text-ink">{doc.filename}</span>
-                            <StatusBadge status={doc.status} />
-                          </span>
-                          <span className="block text-[13px] text-muted">
-                            {chunksLabel(doc.chunk_count)}, {fmtKB(doc.file_size)}
-                          </span>
-                        </span>
-                        <ArrowRight className="h-4 w-4 shrink-0 text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-                {allDocs.length > 5 && (
-                  <button
-                    onClick={() => setShowAllPrev(v => !v)}
-                    className="mt-2 text-[13px] font-medium text-muted transition-colors hover:text-ink"
+              <div className="space-y-3.5">
+                {routes.map(r => (
+                  <div
+                    key={r.key}
+                    className="glass-card group flex items-start gap-4 rounded-2xl border border-[var(--border-glass)] bg-surface/80 p-5 backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:shadow-md"
                   >
-                    {showAllPrev ? 'Show fewer' : `Show all ${allDocs.length} documents`}
-                  </button>
+                    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${ROUTE[r.key].iconBg} shadow-sm transition-transform group-hover:scale-105`}>
+                      {r.icon}
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="text-base font-bold text-ink">{r.title}</span>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${ROUTE[r.key].chip}`}>
+                          <span className={`h-1.5 w-1.5 rounded-full ${ROUTE[r.key].dot}`} />
+                          {ROUTE[r.key].long}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-muted/90">{r.sub}</p>
+                      <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface-2/60 px-2.5 py-1 text-xs italic text-ink-2">
+                        <span className="font-semibold text-muted not-italic">e.g.</span>
+                        "{r.example}"
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Upload Box + Previous Documents */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-6 lg:col-span-5"
+            >
+              {/* Dropzone Card */}
+              <div
+                role="button"
+                tabIndex={0}
+                aria-label="Upload a document"
+                onClick={() => !isUploading && fileInputRef.current?.click()}
+                onKeyDown={e => {
+                  if ((e.key === 'Enter' || e.key === ' ') && !isUploading) {
+                    e.preventDefault();
+                    fileInputRef.current?.click();
+                  }
+                }}
+                className={`relative flex min-h-[280px] cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed p-8 text-center transition-all ${
+                  isDragOver
+                    ? 'border-accent bg-accent/10 shadow-xl scale-[1.01]'
+                    : 'border-line-strong/80 bg-surface/85 backdrop-blur-xl shadow-md hover:border-accent/60 hover:bg-surface-2/90 hover:shadow-lg'
+                }`}
+              >
+                {fileInput(fileInputRef)}
+                {isUploading ? (
+                  <div className="w-full max-w-xs">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl brand-btn text-white animate-pulse shadow-lg">
+                      <Upload className="h-6 w-6" />
+                    </div>
+                    <p className="truncate text-base font-bold text-ink">{uploadProgress}</p>
+                    <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-3">
+                      <div className="indeterminate h-full w-1/3 rounded-full bg-accent" />
+                    </div>
+                    <p className="mt-3 text-xs text-muted">Parsing file, chunking, and computing vector embeddings...</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl brand-btn text-white shadow-lg transition-transform group-hover:scale-105">
+                      <Upload className="h-7 w-7" />
+                    </div>
+                    <p className="mt-4 text-lg font-bold text-ink">
+                      {isDragOver ? 'Drop to upload now' : 'Drop your document here'}
+                    </p>
+                    <p className="mt-1 text-xs text-muted">or click to browse from device</p>
+                    <div className="mt-5 flex items-center gap-1.5">
+                      <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-muted">PDF</span>
+                      <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-muted">DOCX</span>
+                      <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-muted">TXT</span>
+                      <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-muted">Markdown</span>
+                    </div>
+                  </>
                 )}
               </div>
-            )}
-          </motion.div>
+
+              {/* Previous Documents Glass Panel */}
+              {allDocs.length > 0 && (
+                <div className="rounded-3xl border border-[var(--border-glass)] bg-surface/85 p-5 backdrop-blur-xl shadow-sm">
+                  <div className="flex items-center justify-between pb-3 border-b border-line">
+                    <h3 className="text-sm font-bold text-ink flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-accent" />
+                      Uploaded Documents
+                    </h3>
+                    <span className="rounded-full bg-surface-2 px-2 py-0.5 text-xs font-semibold text-muted">
+                      {allDocs.length} total
+                    </span>
+                  </div>
+
+                  <ul className="mt-3 divide-y divide-line/60">
+                    {(showAllPrev ? allDocs : allDocs.slice(0, 4)).map(doc => (
+                      <li key={doc.id}>
+                        <button
+                          onClick={() => switchToDoc(doc)}
+                          className="group flex w-full items-center gap-3 rounded-xl p-2.5 text-left transition-colors hover:bg-surface-2"
+                        >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-3 text-muted group-hover:text-ink">
+                            <FileText className="h-4 w-4" />
+                          </div>
+                          <span className="min-w-0 flex-1">
+                            <span className="flex items-center">
+                              <span className="truncate text-xs font-semibold text-ink">{doc.filename}</span>
+                              <StatusBadge status={doc.status} />
+                            </span>
+                            <span className="block text-[11px] text-muted">
+                              {chunksLabel(doc.chunk_count)} • {fmtKB(doc.file_size)}
+                            </span>
+                          </span>
+                          <ArrowRight className="h-4 w-4 shrink-0 text-faint transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {allDocs.length > 4 && (
+                    <button
+                      onClick={() => setShowAllPrev(v => !v)}
+                      className="mt-3 w-full rounded-xl border border-line bg-surface-2/60 py-2 text-center text-xs font-bold text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                    >
+                      {showAllPrev ? 'Show fewer' : `View all ${allDocs.length} documents`}
+                    </button>
+                  )}
+                </div>
+              )}
+            </motion.div>
+
+          </div>
+
         </div>
       </div>
     );
@@ -793,24 +868,24 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
       {/* ---------------- Left rail: documents, scope, route ---------------- */}
       <aside
         aria-label="Documents and search options"
-        className={`fixed inset-y-0 left-0 z-40 flex w-[290px] flex-col border-r border-line bg-surface transition-transform duration-200 lg:static lg:z-auto lg:w-[264px] lg:shrink-0 lg:translate-x-0 ${railOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-y-0 left-0 z-40 flex w-[300px] flex-col border-r border-line bg-surface/85 backdrop-blur-xl shadow-lg transition-transform duration-200 lg:static lg:z-auto lg:w-[280px] lg:shrink-0 lg:translate-x-0 ${railOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
-        <div className="flex shrink-0 items-center justify-between px-4 pb-2 pt-4">
-          <h2 className="text-sm font-semibold text-ink">Documents</h2>
+        <div className="flex shrink-0 items-center justify-between px-4 pb-2 pt-4 border-b border-line/60">
+          <h2 className="text-sm font-bold text-ink uppercase tracking-wider">Documents</h2>
           <div className="flex items-center gap-1">
             <button
               onClick={() => chatFileInputRef.current?.click()}
               disabled={isUploading}
-              className="flex items-center gap-1 rounded-lg px-2 py-1 text-[13px] font-medium text-ink transition-colors hover:bg-surface-2 disabled:opacity-50"
+              className="flex items-center gap-1.5 rounded-full border border-line-strong bg-surface-2/80 px-3 py-1 text-xs font-semibold text-ink transition-all hover:bg-surface-3 hover:scale-105 shadow-sm disabled:opacity-50"
             >
-              <Plus className="h-3.5 w-3.5" />
-              Add document
+              <Plus className="h-3.5 w-3.5 text-accent" />
+              Add
             </button>
             <button
               onClick={() => setRailOpen(false)}
               aria-label="Close documents"
-              className="rounded-lg p-1.5 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
+              className="rounded-full p-1.5 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
             >
               <X className="h-4 w-4" />
             </button>
@@ -818,34 +893,34 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
         </div>
 
         {isUploading && (
-          <div className="mx-4 mb-2 shrink-0 rounded-lg bg-surface-2 px-3 py-2.5">
-            <p className="truncate text-[13px] font-medium text-ink">{uploadProgress}</p>
-            <div className="mt-2 h-1 overflow-hidden rounded-full bg-line">
-              <div className="indeterminate h-full w-1/3 rounded-full bg-ink" />
+          <div className="mx-4 my-2 shrink-0 rounded-2xl bg-surface-2/90 border border-line p-3 shadow-sm">
+            <p className="truncate text-xs font-bold text-ink">{uploadProgress}</p>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-3">
+              <div className="indeterminate h-full w-1/3 rounded-full bg-accent" />
             </div>
           </div>
         )}
 
         {scope === 'selected' && (
-          <div className="flex shrink-0 items-center justify-between px-4 pb-1.5 text-[13px]">
-            <span className="text-muted">
+          <div className="flex shrink-0 items-center justify-between px-4 py-2 text-xs border-b border-line/40 bg-surface-2/40">
+            <span className="text-muted font-medium">
               {selectedIds.length} of {selectableDocs.length} selected
             </span>
             <span className="flex items-center gap-3">
               <button
                 onClick={() => setSelectedIds(selectableDocs.map(d => d.id))}
-                className="font-medium text-ink-2 hover:text-ink"
+                className="font-bold text-accent hover:underline"
               >
-                Select all
+                All
               </button>
-              <button onClick={() => setSelectedIds([])} className="font-medium text-ink-2 hover:text-ink">
+              <button onClick={() => setSelectedIds([])} className="font-bold text-muted hover:text-ink">
                 Clear
               </button>
             </span>
           </div>
         )}
 
-        <ul className="min-h-[96px] flex-1 overflow-y-auto px-2 pb-3">
+        <ul className="min-h-[96px] flex-1 overflow-y-auto px-2 py-3 space-y-1">
           {allDocs.map(doc => {
             const active = activeDoc?.id === doc.id;
             const pickMode = scope === 'selected';
@@ -860,29 +935,33 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   role={pickMode ? 'checkbox' : undefined}
                   aria-checked={pickMode ? picked : undefined}
                   disabled={pickMode && !usable}
-                  className={`relative flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors disabled:opacity-45 ${highlighted ? 'bg-surface-2' : 'hover:bg-surface-2/60'
-                    }`}
+                  className={`group relative flex w-full items-start gap-2.5 rounded-xl px-3 py-2 text-left transition-all disabled:opacity-45 ${
+                    highlighted
+                      ? 'bg-surface-2/90 border border-line-strong shadow-sm'
+                      : 'hover:bg-surface-2/60 border border-transparent'
+                  }`}
                 >
-                  {!pickMode && active && <span className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-ink" />}
+                  {!pickMode && active && <span className="absolute inset-y-2 left-0.5 w-[3px] rounded-full bg-accent" />}
                   {pickMode ? (
                     <span
-                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border ${picked ? 'border-ink bg-ink text-accent-ink' : 'border-line-strong bg-surface'
-                        }`}
+                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-md border ${
+                        picked ? 'border-accent bg-accent text-white' : 'border-line-strong bg-surface'
+                      }`}
                     >
                       {picked && <Check className="h-3 w-3" />}
                     </span>
                   ) : (
-                    <FileText className={`mt-0.5 h-4 w-4 shrink-0 ${active ? 'text-ink' : 'text-faint'}`} />
+                    <FileText className={`mt-0.5 h-4 w-4 shrink-0 ${active ? 'text-accent' : 'text-faint group-hover:text-ink'}`} />
                   )}
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center">
-                      <span className={`truncate text-sm ${highlighted ? 'font-semibold text-ink' : 'font-medium text-ink-2'}`}>
+                      <span className={`truncate text-xs ${highlighted ? 'font-bold text-ink' : 'font-medium text-ink-2'}`}>
                         {doc.filename}
                       </span>
                       <StatusBadge status={doc.status} />
                     </span>
-                    <span className="block text-xs text-muted">
-                      {chunksLabel(doc.chunk_count)}, {fmtKB(doc.file_size)}
+                    <span className="block text-[11px] text-muted">
+                      {chunksLabel(doc.chunk_count)} • {fmtKB(doc.file_size)}
                     </span>
                   </span>
                 </button>
@@ -892,9 +971,9 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
         </ul>
 
         {/* Scope and method stay pinned below the document list */}
-        <div className="shrink-0 border-t border-line px-4 pb-3 pt-4">
-          <h2 className="text-sm font-semibold text-ink">Search in</h2>
-          <div className="mt-2 grid grid-cols-3 rounded-lg bg-surface-2 p-0.5" role="radiogroup" aria-label="Search scope">
+        <div className="shrink-0 border-t border-line px-4 pb-3 pt-3.5 bg-surface-2/30">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-muted">Search In Scope</h2>
+          <div className="mt-2 grid grid-cols-3 rounded-full bg-surface-2/80 p-1 border border-line-strong backdrop-blur-sm shadow-inner" role="radiogroup" aria-label="Search scope">
             {(
               [
                 ['document', 'This doc'],
@@ -908,8 +987,9 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                 role="radio"
                 aria-checked={scope === key}
                 onClick={() => chooseScope(key)}
-                className={`rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors ${scope === key ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink'
-                  }`}
+                className={`rounded-full px-2 py-1 text-xs font-bold transition-all ${
+                  scope === key ? 'brand-btn text-white shadow-sm' : 'text-muted hover:text-ink'
+                }`}
               >
                 {label}
               </button>
@@ -918,9 +998,9 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
         </div>
 
         {/* Route */}
-        <div className="shrink-0 px-4 pb-5">
-          <h2 className="text-sm font-semibold text-ink">Search method</h2>
-          <div className="mt-2 space-y-0.5" role="radiogroup" aria-label="Search method">
+        <div className="shrink-0 px-4 pb-5 pt-1 bg-surface-2/30">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-muted">Routing Method</h2>
+          <div className="mt-2 space-y-1.5" role="radiogroup" aria-label="Search method">
             {(['auto', 'local', 'global', 'hybrid'] as const).map(mode => {
               const selected = routeMode === mode;
               return (
@@ -930,62 +1010,67 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   role="radio"
                   aria-checked={selected}
                   onClick={() => setRouteMode(mode)}
-                  className={`flex w-full items-start gap-3 rounded-lg px-2.5 py-2 text-left transition-colors ${selected ? 'bg-surface-2' : 'hover:bg-surface-2/60'
-                    }`}
+                  className={`flex w-full items-start gap-2.5 rounded-xl px-2.5 py-2 text-left transition-all ${
+                    selected
+                      ? 'bg-surface border border-accent/30 shadow-sm'
+                      : 'hover:bg-surface-2/70 border border-transparent'
+                  }`}
                 >
                   <span
-                    className={`mt-[5px] h-2.5 w-2.5 shrink-0 rounded-full ${mode === 'auto' ? 'bg-gradient-to-br from-local via-global to-hybrid' : ROUTE[mode].dot
-                      }`}
+                    className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${
+                      mode === 'auto' ? 'bg-gradient-to-r from-sky-400 via-purple-500 to-amber-500 shadow-sm' : ROUTE[mode].dot
+                    }`}
                   />
                   <span className="min-w-0 flex-1">
-                    <span className={`block text-sm ${selected ? 'font-semibold text-ink' : 'font-medium text-ink-2'}`}>
-                      {mode === 'auto' ? 'Auto' : ROUTE[mode].long}
+                    <span className={`block text-xs ${selected ? 'font-bold text-ink' : 'font-medium text-ink-2'}`}>
+                      {mode === 'auto' ? 'Auto Dynamic' : ROUTE[mode].long}
                     </span>
-                    <span className="block text-xs leading-snug text-muted">
-                      {mode === 'auto' ? 'The router picks a method for each question' : ROUTE[mode].meaning}
+                    <span className="block text-[11px] leading-tight text-muted">
+                      {mode === 'auto' ? 'AI router selects best path' : ROUTE[mode].meaning}
                     </span>
                   </span>
-                  {selected && <Check className="mt-0.5 h-4 w-4 shrink-0 text-ink" />}
+                  {selected && <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />}
                 </button>
               );
             })}
           </div>
           {forcedNonLocal && (
-            <p className="mt-2 rounded-lg bg-hybrid-bg px-3 py-2 text-xs leading-snug text-hybrid-ink">
-              {scope === 'selected' ? 'Selected-documents mode' : 'Single-document mode'} always uses local search.
-              Switch to All docs to use the graph.
+            <p className="mt-2 rounded-xl bg-amber-500/10 border border-amber-500/20 px-3 py-2 text-[11px] leading-snug text-amber-700 dark:text-amber-300">
+              {scope === 'selected' ? 'Selected documents' : 'Single document'} scope uses local search.
+              Switch to All docs to query the graph.
             </p>
           )}
         </div>
       </aside>
 
       {/* ---------------- Centre: conversation ---------------- */}
-      <section className="flex min-w-0 flex-1 flex-col bg-bg">
-        <div className="flex h-12 shrink-0 items-center gap-2 border-b border-line bg-surface/60 px-3 sm:px-5">
+      <section className="flex min-w-0 flex-1 flex-col bg-transparent">
+        <div className="flex h-14 shrink-0 items-center gap-2 border-b border-line bg-surface/75 backdrop-blur-md px-4 sm:px-6">
           <button
             onClick={() => setRailOpen(true)}
             aria-label="Open documents and options"
-            className="rounded-lg p-2 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
+            className="rounded-full p-2 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
           >
             <PanelLeft className="h-[18px] w-[18px]" />
           </button>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-semibold text-ink">
-              {scope === 'document' ? activeDoc?.filename : scope === 'all' ? 'All documents' : selectedIds.length === 0 ? 'No documents selected' : scopeSentence}
+            <p className="truncate text-sm font-bold text-ink flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              {scope === 'document' ? activeDoc?.filename : scope === 'all' ? 'All indexed documents' : selectedIds.length === 0 ? 'No documents selected' : scopeSentence}
             </p>
           </div>
           <button
             onClick={() => setEvidenceOpen(true)}
             aria-label="Open evidence"
-            className="relative rounded-lg p-2 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
+            className="relative rounded-full p-2 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
           >
             <PanelRight className="h-[18px] w-[18px]" />
-            {hasEvidence && <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-global" />}
+            {hasEvidence && <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-accent" />}
           </button>
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <div className="mx-auto flex w-full max-w-[760px] flex-col gap-7 px-4 py-8 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[800px] flex-col gap-7 px-4 py-8 sm:px-6">
             {messages.map((msg, idx) => {
               const isUser = msg.sender === 'user';
               const isSystem = msg.id.startsWith('sys-');
@@ -997,12 +1082,12 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                     key={msg.id}
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mx-auto max-w-md text-center"
+                    className="mx-auto max-w-md text-center rounded-2xl border border-line bg-surface/70 backdrop-blur-md p-4 shadow-sm"
                   >
-                    <span className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-surface-2 text-muted">
+                    <span className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent">
                       <FileText className="h-4 w-4" />
                     </span>
-                    <p className="whitespace-pre-line text-sm leading-relaxed text-muted">{msg.text}</p>
+                    <p className="whitespace-pre-line text-xs sm:text-sm leading-relaxed text-muted">{msg.text}</p>
                   </motion.div>
                 );
               }
@@ -1016,7 +1101,7 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                     transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     className="flex justify-end"
                   >
-                    <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-md bg-surface-2 px-4 py-2.5 text-[15px] text-ink">
+                    <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-3xl rounded-br-md brand-btn px-5 py-3 text-[15px] font-medium text-white shadow-md">
                       {msg.text}
                     </div>
                   </motion.div>
@@ -1028,7 +1113,7 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   <div
                     key={msg.id}
                     role="alert"
-                    className="flex items-start gap-3 rounded-xl bg-bad-bg px-4 py-3 text-sm text-bad"
+                    className="flex items-start gap-3 rounded-2xl border border-bad/30 bg-bad-bg/80 backdrop-blur-md px-4 py-3 text-sm text-bad shadow-sm"
                   >
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
                     <p>{msg.text}</p>
@@ -1054,17 +1139,24 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="min-w-0"
+                  className="rounded-3xl border border-[var(--border-glass)] bg-surface/85 backdrop-blur-xl p-6 sm:p-7 shadow-[var(--shadow-sm)] transition-shadow hover:shadow-md"
                 >
                   {route && (
-                    <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-muted">
+                    <div className="mb-3.5 flex flex-wrap items-center gap-2 text-xs text-muted">
                       <RouteChip route={route} />
-                      {msg.confidence != null && <span>{Math.round(msg.confidence * 100)}% confidence</span>}
-                      {msg.latency_ms != null && msg.latency_ms > 0 && <span>{(msg.latency_ms / 1000).toFixed(1)} s</span>}
+                      {msg.confidence != null && (
+                        <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-semibold text-ink-2">
+                          {Math.round(msg.confidence * 100)}% confidence
+                        </span>
+                      )}
+                      {msg.latency_ms != null && msg.latency_ms > 0 && (
+                        <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-semibold text-muted">
+                          {(msg.latency_ms / 1000).toFixed(1)}s
+                        </span>
+                      )}
                       {msg.tokens_used != null && msg.tokens_used > 0 && (
-                        <span title={msg.tokens_exact ? 'Token count reported by the model' : 'Estimated token count'}>
-                          {msg.tokens_exact ? '' : '~'}
-                          {fmtTokens(msg.tokens_used)} tokens
+                        <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-semibold text-muted" title={msg.tokens_exact ? 'Token count reported by the model' : 'Estimated token count'}>
+                          {msg.tokens_exact ? '' : '~'}{fmtTokens(msg.tokens_used)} tokens
                         </span>
                       )}
                     </div>
@@ -1073,15 +1165,15 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   <div className="answer">{msg.text}</div>
 
                   {msg.scope_note && (
-                    <p className="mt-3 rounded-lg bg-hybrid-bg px-3 py-2 text-[13px] leading-snug text-hybrid-ink">
+                    <p className="mt-3 rounded-xl bg-amber-500/10 border border-amber-500/20 px-3 py-2 text-xs leading-snug text-amber-700 dark:text-amber-300">
                       {msg.scope_note}
                     </p>
                   )}
 
                   {hasSources && (
-                    <div className="mt-5">
-                      <p className="mb-2 text-[13px] font-semibold text-ink">Sources</p>
-                      <div className="flex flex-wrap gap-1.5">
+                    <div className="mt-5 border-t border-line/60 pt-4">
+                      <p className="mb-2.5 text-xs font-bold uppercase tracking-wider text-muted">Cited Sources</p>
+                      <div className="flex flex-wrap gap-2">
                         {msg.community_citations?.map((c: CommunityCitation, i: number) => {
                           const selected =
                             selectedCitation?.type === 'community' &&
@@ -1091,13 +1183,14 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                               key={`comm-${i}`}
                               onClick={() => openCitation({ type: 'community', data: c, query })}
                               aria-pressed={selected}
-                              className={`inline-flex max-w-full items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[13px] transition-colors ${selected
-                                  ? 'border-global bg-global-bg text-global-ink'
-                                  : 'border-line bg-surface text-ink-2 hover:border-line-strong hover:bg-surface-2'
-                                }`}
+                              className={`inline-flex max-w-full items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold transition-all hover:scale-105 ${
+                                selected
+                                  ? 'border-purple-500 bg-purple-500/20 text-purple-700 dark:text-purple-300 shadow-sm'
+                                  : 'border-line-strong bg-surface-2/80 text-ink-2 hover:bg-surface-3'
+                              }`}
                             >
-                              <GitFork className="h-3.5 w-3.5 shrink-0 text-global-ink" />
-                              <span className="truncate font-medium">{c.title}</span>
+                              <GitFork className="h-3.5 w-3.5 shrink-0 text-purple-500" />
+                              <span className="truncate">{c.title}</span>
                             </button>
                           );
                         })}
@@ -1111,27 +1204,28 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                               key={`chunk-${i}`}
                               onClick={() => openCitation({ type: 'chunk', data: cite, query })}
                               aria-pressed={selected}
-                              className={`inline-flex max-w-full items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[13px] transition-colors ${selected
-                                  ? 'border-local bg-local-bg text-local-ink'
-                                  : 'border-line bg-surface text-ink-2 hover:border-line-strong hover:bg-surface-2'
-                                }`}
+                              className={`inline-flex max-w-full items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold transition-all hover:scale-105 ${
+                                selected
+                                  ? 'border-cyan-500 bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 shadow-sm'
+                                  : 'border-line-strong bg-surface-2/80 text-ink-2 hover:bg-surface-3'
+                              }`}
                             >
-                              <BookOpen className="h-3.5 w-3.5 shrink-0 text-local-ink" />
-                              <span className="max-w-[170px] truncate font-medium">{cite.filename}</span>
-                              <span className="shrink-0 text-muted">chunk {cite.chunk_index}</span>
+                              <BookOpen className="h-3.5 w-3.5 shrink-0 text-cyan-500" />
+                              <span className="max-w-[160px] truncate">{cite.filename}</span>
+                              <span className="text-muted font-normal">#{cite.chunk_index}</span>
                             </button>
                           );
                         })}
                       </div>
                       {!!msg.entity_citations?.length && (
-                        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                        <div className="mt-2.5 flex flex-wrap gap-1.5">
                           {msg.entity_citations.map((ent, i) => (
                             <button
                               key={`ent-${i}`}
                               onClick={() => openCitation({ type: 'entity', data: { name: ent }, query })}
-                              className="inline-flex items-center gap-1 text-[13px] text-muted transition-colors hover:text-ink"
+                              className="inline-flex items-center gap-1 rounded-full border border-line bg-surface-2/50 px-2 py-0.5 text-[11px] font-medium text-muted transition-colors hover:text-ink hover:border-line-strong"
                             >
-                              <Network className="h-3 w-3" />
+                              <Network className="h-2.5 w-2.5 text-purple-400" />
                               {ent}
                             </button>
                           ))}
@@ -1141,21 +1235,21 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                   )}
 
                   {route && (
-                    <div className="mt-4 flex items-center justify-between border-t border-line pt-2">
+                    <div className="mt-4 flex items-center justify-between border-t border-line/60 pt-2.5">
                       <button
                         onClick={() => toggleTrace(msg.id)}
                         aria-expanded={open}
-                        className="flex items-center gap-1 rounded-md py-1 pr-2 text-[13px] font-medium text-muted transition-colors hover:text-ink"
+                        className="flex items-center gap-1.5 rounded-lg py-1 pr-2 text-xs font-semibold text-muted transition-colors hover:text-ink"
                       >
-                        How it was routed
+                        Router Insights
                         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
                       </button>
-                      <div className="flex items-center gap-0.5">
+                      <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleCopy(msg.text, msg.id)}
                           aria-label="Copy answer"
                           title="Copy"
-                          className="rounded-md p-1.5 text-faint transition-colors hover:bg-surface-2 hover:text-ink"
+                          className="rounded-full p-1.5 text-muted transition-all hover:bg-surface-2 hover:text-ink"
                         >
                           {copiedId === msg.id ? <Check className="h-4 w-4 text-ok" /> : <Copy className="h-4 w-4" />}
                         </button>
@@ -1163,7 +1257,7 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                           onClick={() => handleFeedback(msg.id, 'positive')}
                           aria-label="Good answer"
                           aria-pressed={msg.feedback === 'positive'}
-                          className={`rounded-md p-1.5 transition-colors hover:bg-surface-2 ${msg.feedback === 'positive' ? 'text-ok' : 'text-faint hover:text-ink'
+                          className={`rounded-full p-1.5 transition-all hover:bg-surface-2 ${msg.feedback === 'positive' ? 'text-ok' : 'text-muted hover:text-ink'
                             }`}
                         >
                           <ThumbsUp className="h-4 w-4" />
@@ -1172,7 +1266,7 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                           onClick={() => handleFeedback(msg.id, 'negative')}
                           aria-label="Poor answer"
                           aria-pressed={msg.feedback === 'negative'}
-                          className={`rounded-md p-1.5 transition-colors hover:bg-surface-2 ${msg.feedback === 'negative' ? 'text-bad' : 'text-faint hover:text-ink'
+                          className={`rounded-full p-1.5 transition-all hover:bg-surface-2 ${msg.feedback === 'negative' ? 'text-bad' : 'text-muted hover:text-ink'
                             }`}
                         >
                           <ThumbsDown className="h-4 w-4" />
@@ -1190,27 +1284,27 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div id={`trace-${msg.id}`} className="mb-1 mt-2 rounded-xl bg-surface px-4 py-4 ring-1 ring-line">
+                        <div id={`trace-${msg.id}`} className="mb-1 mt-3 rounded-2xl bg-surface-2/70 border border-line p-4 shadow-inner">
                           {rows && (
                             <>
-                              <p className="mb-2.5 text-[13px] font-semibold text-ink">{rows.title}</p>
+                              <p className="mb-2.5 text-xs font-bold uppercase tracking-wider text-ink">{rows.title}</p>
                               <div className="space-y-2">
                                 {rows.rows.map(r => (
-                                  <div key={r.key} className="flex items-center gap-3 text-[13px]">
+                                  <div key={r.key} className="flex items-center gap-3 text-xs">
                                     <span
-                                      className={`w-[88px] shrink-0 ${r.key === route ? 'font-semibold text-ink' : 'text-muted'
+                                      className={`w-[90px] shrink-0 ${r.key === route ? 'font-bold text-ink' : 'text-muted'
                                         }`}
                                     >
                                       {ROUTE[r.key].long}
                                     </span>
-                                    <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-2">
+                                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-surface-3">
                                       <span
-                                        className={`block h-full rounded-full ${ROUTE[r.key].bar} ${r.key === route ? '' : 'opacity-45'
+                                        className={`block h-full rounded-full ${ROUTE[r.key].bar} ${r.key === route ? '' : 'opacity-40'
                                           }`}
-                                        style={{ width: `${Math.max(r.value * 100, 1.5)}%` }}
+                                        style={{ width: `${Math.max(r.value * 100, 2)}%` }}
                                       />
                                     </span>
-                                    <span className="w-10 shrink-0 text-right tabular-nums text-muted">
+                                    <span className="w-10 shrink-0 text-right font-semibold tabular-nums text-muted">
                                       {Math.round(r.value * 100)}%
                                     </span>
                                   </div>
@@ -1219,31 +1313,31 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                             </>
                           )}
                           {msg.reasoning && (
-                            <p className={`text-[13px] leading-relaxed text-ink-2 ${rows ? 'mt-4' : ''}`}>
+                            <p className={`text-xs leading-relaxed text-ink-2 ${rows ? 'mt-3 pt-3 border-t border-line/60' : ''}`}>
                               {msg.reasoning}
                             </p>
                           )}
-                          <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-5 gap-y-1 text-[13px]">
-                            <dt className="text-muted">Router</dt>
-                            <dd className="text-ink-2">{classifierLabel(msg.classification?.classifier)}</dd>
+                          <dl className="mt-3.5 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-xs border-t border-line/60 pt-3">
+                            <dt className="text-muted font-medium">Router Type</dt>
+                            <dd className="text-ink-2 font-semibold">{classifierLabel(msg.classification?.classifier)}</dd>
                             {msg.model && (
                               <>
-                                <dt className="text-muted">Answer model</dt>
-                                <dd className="text-ink-2">{msg.model}</dd>
+                                <dt className="text-muted font-medium">LLM Model</dt>
+                                <dd className="text-ink-2 font-semibold">{msg.model}</dd>
                               </>
                             )}
                             {msg.tokens_exact && msg.input_tokens != null && (
                               <>
-                                <dt className="text-muted">Tokens</dt>
-                                <dd className="tabular-nums text-ink-2">
+                                <dt className="text-muted font-medium">Tokens</dt>
+                                <dd className="tabular-nums text-ink-2 font-semibold">
                                   {msg.input_tokens.toLocaleString()} in, {(msg.output_tokens ?? 0).toLocaleString()} out
                                 </dd>
                               </>
                             )}
                             {msg.cost_usd != null && msg.cost_usd > 0 && (
                               <>
-                                <dt className="text-muted">Cost</dt>
-                                <dd className="tabular-nums text-ink-2">${msg.cost_usd.toFixed(6)}</dd>
+                                <dt className="text-muted font-medium">Estimated Cost</dt>
+                                <dd className="tabular-nums text-ink-2 font-semibold">${msg.cost_usd.toFixed(6)}</dd>
                               </>
                             )}
                           </dl>
@@ -1256,12 +1350,12 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
             })}
 
             {showSuggestions && !isProcessing && (
-              <div className="flex flex-wrap justify-center gap-2">
-                {['Summarize the key points', 'What are the main topics?', 'List all entities mentioned'].map(q => (
+              <div className="flex flex-wrap justify-center gap-2 py-2">
+                {['Summarize the key points', 'What are the main topics and entities?', 'What are the risks mentioned?'].map(q => (
                   <button
                     key={q}
                     onClick={() => handleSendMessage(q)}
-                    className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-line-strong hover:bg-surface-2 hover:text-ink"
+                    className="rounded-full border border-line-strong bg-surface/85 px-4 py-2 text-xs sm:text-sm font-semibold text-ink-2 backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-2 hover:text-ink hover:scale-105"
                   >
                     {q}
                   </button>
@@ -1270,13 +1364,13 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
             )}
 
             {isProcessing && (
-              <div className="flex items-center gap-3 text-sm text-muted" role="status">
+              <div className="flex items-center justify-center gap-3 py-3 text-xs sm:text-sm font-semibold text-accent" role="status">
                 <span className="flex items-center gap-1">
-                  <span className="thinking-dot h-1.5 w-1.5 rounded-full bg-ink" />
-                  <span className="thinking-dot h-1.5 w-1.5 rounded-full bg-ink" />
-                  <span className="thinking-dot h-1.5 w-1.5 rounded-full bg-ink" />
+                  <span className="thinking-dot h-2 w-2 rounded-full bg-accent" />
+                  <span className="thinking-dot h-2 w-2 rounded-full bg-accent" />
+                  <span className="thinking-dot h-2 w-2 rounded-full bg-accent" />
                 </span>
-                Finding evidence and writing the answer
+                Extracting evidence & synthesizing answer...
               </div>
             )}
 
@@ -1285,9 +1379,9 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
         </div>
 
         {/* Composer */}
-        <div className="shrink-0 border-t border-line bg-bg px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 sm:px-6">
-          <div className="mx-auto w-full max-w-[760px]">
-            <div className="flex items-end gap-2 rounded-2xl border border-line-strong bg-surface p-2 shadow-[var(--shadow)] transition-colors focus-within:border-ink">
+        <div className="shrink-0 border-t border-line/60 bg-surface/70 backdrop-blur-md px-4 pb-[max(env(safe-area-inset-bottom),14px)] pt-3.5 sm:px-6">
+          <div className="mx-auto w-full max-w-[800px]">
+            <div className="flex items-end gap-2 rounded-2xl sm:rounded-full border border-line-strong bg-surface/90 backdrop-blur-xl p-2 sm:p-2.5 shadow-lg transition-all focus-within:border-accent focus-within:ring-4 focus-within:ring-accent/15">
               <textarea
                 ref={composerRef}
                 rows={1}
@@ -1299,23 +1393,23 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
                     handleSendMessage();
                   }
                 }}
-                placeholder={scope === 'document' ? 'Ask a question about your document' : 'Ask a question about your documents'}
+                placeholder={scope === 'document' ? 'Ask a question about this document...' : 'Ask a question across your documents...'}
                 aria-label="Your question"
-                className="max-h-[132px] min-h-[40px] flex-1 resize-none bg-transparent px-2.5 py-2 text-[15px] text-ink outline-none placeholder:text-faint"
+                className="max-h-[132px] min-h-[40px] flex-1 resize-none bg-transparent px-3 py-2 text-[15px] font-medium text-ink outline-none placeholder:text-muted"
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputQuery.trim() || isProcessing || noSelection}
                 aria-label="Send question"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-ink transition-opacity disabled:opacity-25"
+                className="brand-btn flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-full text-white shadow-md transition-all disabled:opacity-25 hover:scale-105 active:scale-95"
               >
-                <ArrowUp className="h-[18px] w-[18px]" />
+                <ArrowUp className="h-5 w-5" />
               </button>
             </div>
-            <p className="mt-2 text-center text-xs text-muted">
+            <p className="mt-2 text-center text-[11px] font-medium text-muted">
               {noSelection
-                ? 'Tick at least one document in the list to ask a question.'
-                : `Searching ${scopeSentence} using ${routeSummary}${forcedNonLocal ? '. This scope always uses local search.' : ''
+                ? 'Select at least one document in the left sidebar to ask.'
+                : `Searching ${scopeSentence} using ${routeSummary}${forcedNonLocal ? ' (local search enforced for single docs).' : ''
                 }`}
             </p>
           </div>
@@ -1325,15 +1419,18 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
       {/* ---------------- Right: evidence ---------------- */}
       <aside
         aria-label="Evidence"
-        className={`fixed inset-y-0 right-0 z-40 flex w-[min(92vw,400px)] flex-col border-l border-line bg-surface transition-transform duration-200 lg:static lg:z-auto lg:w-[360px] lg:shrink-0 lg:translate-x-0 ${evidenceOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-y-0 right-0 z-40 flex w-[min(92vw,420px)] flex-col border-l border-line bg-surface/85 backdrop-blur-xl shadow-xl transition-transform duration-200 lg:static lg:z-auto lg:w-[380px] lg:shrink-0 lg:translate-x-0 ${evidenceOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
-        <div className="flex h-12 shrink-0 items-center justify-between border-b border-line px-4">
-          <h2 className="text-sm font-semibold text-ink">Evidence</h2>
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-line px-5">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-ink flex items-center gap-2">
+            <BookOpen className="h-4 w-4 text-accent" />
+            Verified Evidence
+          </h2>
           <button
             onClick={() => setEvidenceOpen(false)}
             aria-label="Close evidence"
-            className="rounded-lg p-1.5 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
+            className="rounded-full p-1.5 text-muted hover:bg-surface-2 hover:text-ink lg:hidden"
           >
             <X className="h-4 w-4" />
           </button>
@@ -1341,32 +1438,32 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
 
         <div ref={evidenceScrollRef} className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5">
           {!selectedCitation && (
-            <div className="mt-10 text-center">
-              <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-surface-2 text-faint">
-                <BookOpen className="h-5 w-5" />
+            <div className="mt-12 text-center">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-2 text-muted shadow-sm">
+                <BookOpen className="h-6 w-6 text-accent" />
               </span>
-              <p className="mt-4 text-sm font-medium text-ink">No source selected</p>
-              <p className="mx-auto mt-1 max-w-[240px] text-sm text-muted">
-                Pick a source under an answer to read the passage it came from.
+              <p className="mt-4 text-sm font-bold text-ink">No Source Selected</p>
+              <p className="mx-auto mt-1.5 max-w-[240px] text-xs text-muted leading-relaxed">
+                Click any citation badge under an assistant response to view the verified text passage and graph context.
               </p>
             </div>
           )}
 
           {selectedCitation?.type === 'chunk' && (
             <div>
-              <div className="sticky -top-5 z-10 -mx-5 -mt-5 mb-4 flex items-start justify-between gap-3 border-b border-line bg-surface px-5 pb-3 pt-5">
+              <div className="sticky -top-5 z-10 -mx-5 -mt-5 mb-4 flex items-start justify-between gap-3 border-b border-line bg-surface/90 backdrop-blur-md px-5 pb-3.5 pt-5 shadow-sm">
                 <div className="min-w-0">
-                  <p className="break-words text-[15px] font-semibold text-ink">{selectedCitation.data.filename}</p>
-                  <p className="text-[13px] text-muted">Chunk {selectedCitation.data.chunk_index}</p>
+                  <p className="break-words text-sm font-bold text-ink">{selectedCitation.data.filename}</p>
+                  <p className="text-xs text-muted">Chunk Index: #{selectedCitation.data.chunk_index}</p>
                 </div>
-                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-local" title="Passage from vector search" />
+                <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]" title="Vector search passage" />
               </div>
-              <div className="passage border-l-2 border-local pl-4">
+              <div className="passage rounded-2xl border-l-4 border-cyan-500 bg-surface-2/60 p-4 shadow-sm">
                 <Highlighted text={selectedCitation.data.text || ''} query={selectedCitation.query} />
               </div>
               {selectedCitation.data.start_char != null && selectedCitation.data.end_char != null && (
-                <p className="mt-4 text-[13px] text-muted">
-                  Characters {selectedCitation.data.start_char} to {selectedCitation.data.end_char} of the document
+                <p className="mt-3 text-[11px] text-muted">
+                  Span: characters {selectedCitation.data.start_char} to {selectedCitation.data.end_char}
                 </p>
               )}
             </div>
@@ -1374,22 +1471,26 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
 
           {selectedCitation?.type === 'community' && (
             <div>
-              <div className="flex items-start gap-2.5">
-                <GitFork className="mt-0.5 h-4 w-4 shrink-0 text-global-ink" />
+              <div className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-500/15 text-purple-600">
+                  <GitFork className="h-5 w-5" />
+                </div>
                 <div className="min-w-0">
-                  <p className="break-words text-[15px] font-semibold text-ink">{selectedCitation.data.title}</p>
-                  <p className="text-[13px] text-muted">Knowledge graph community</p>
+                  <p className="break-words text-sm font-bold text-ink">{selectedCitation.data.title}</p>
+                  <p className="text-xs text-muted">Knowledge Graph Community</p>
                 </div>
               </div>
-              <p className="passage mt-4 border-l-2 border-global pl-4">{selectedCitation.data.summary}</p>
+              <p className="passage mt-4 rounded-2xl border-l-4 border-purple-500 bg-surface-2/60 p-4 shadow-sm">
+                {selectedCitation.data.summary}
+              </p>
               {selectedCitation.data.member_names?.length > 0 && (
                 <div className="mt-5">
-                  <p className="mb-2 text-[13px] font-semibold text-ink">
-                    Entities in this community ({selectedCitation.data.member_count})
+                  <p className="mb-2 text-xs font-bold uppercase tracking-wider text-muted">
+                    Community Entities ({selectedCitation.data.member_count})
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedCitation.data.member_names.map((name: string, i: number) => (
-                      <span key={i} className="rounded-md bg-surface-2 px-2 py-0.5 text-[13px] text-ink-2">
+                      <span key={i} className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-xs font-semibold text-ink-2">
                         {name}
                       </span>
                     ))}
@@ -1401,16 +1502,17 @@ export const DocumentChatApp: React.FC<DocumentChatAppProps> = ({ currentUser, a
 
           {selectedCitation?.type === 'entity' && (
             <div>
-              <div className="flex items-start gap-2.5">
-                <Network className="mt-0.5 h-4 w-4 shrink-0 text-global-ink" />
+              <div className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-500/15 text-purple-600">
+                  <Network className="h-5 w-5" />
+                </div>
                 <div className="min-w-0">
-                  <p className="break-words text-[15px] font-semibold text-ink">{selectedCitation.data.name}</p>
-                  <p className="text-[13px] text-muted">Entity from the knowledge graph</p>
+                  <p className="break-words text-sm font-bold text-ink">{selectedCitation.data.name}</p>
+                  <p className="text-xs text-muted">Knowledge Graph Node</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                This entity was extracted from your documents. It appears in relationships and in the community
-                summaries the answer was built from.
+              <p className="mt-4 rounded-2xl bg-surface-2/60 border border-line p-4 text-xs leading-relaxed text-muted">
+                This entity was extracted from your ingested corpus. It links multiple document facts across graph communities.
               </p>
             </div>
           )}

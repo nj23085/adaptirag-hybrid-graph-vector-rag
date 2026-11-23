@@ -152,9 +152,9 @@ type RouteKey = 'local' | 'global' | 'hybrid';
 const ROUTES: RouteKey[] = ['local', 'global', 'hybrid'];
 
 const ROUTE: Record<RouteKey, { label: string; chip: string; dot: string; bar: string; ink: string }> = {
-    local: { label: 'Local search', chip: 'bg-local-bg text-local-ink', dot: 'bg-local', bar: 'bg-local', ink: 'text-local-ink' },
-    global: { label: 'Global graph', chip: 'bg-global-bg text-global-ink', dot: 'bg-global', bar: 'bg-global', ink: 'text-global-ink' },
-    hybrid: { label: 'Hybrid', chip: 'bg-hybrid-bg text-hybrid-ink', dot: 'bg-hybrid', bar: 'bg-hybrid', ink: 'text-hybrid-ink' }
+    local: { label: 'Local search', chip: 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30', dot: 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]', bar: 'bg-gradient-to-r from-cyan-400 to-teal-500', ink: 'text-cyan-700 dark:text-cyan-300' },
+    global: { label: 'Global graph', chip: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/30', dot: 'bg-purple-500 shadow-[0_0_8px_rgba(139,92,246,0.6)]', bar: 'bg-gradient-to-r from-purple-400 to-indigo-500', ink: 'text-purple-700 dark:text-purple-300' },
+    hybrid: { label: 'Hybrid', chip: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30', dot: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]', bar: 'bg-gradient-to-r from-amber-400 to-orange-500', ink: 'text-amber-700 dark:text-amber-300' }
 };
 
 const PAGE_SIZE = 10;
@@ -197,15 +197,16 @@ const Segmented: React.FC<{
     options: { value: string; label: string }[];
     label: string;
 }> = ({ value, onChange, options, label }) => (
-    <div className="inline-flex rounded-lg bg-surface-2 p-0.5" role="radiogroup" aria-label={label}>
+    <div className="inline-flex rounded-full bg-surface-2/80 p-1 border border-line-strong backdrop-blur-sm shadow-inner" role="radiogroup" aria-label={label}>
         {options.map(o => (
             <button
                 key={o.value}
                 role="radio"
                 aria-checked={value === o.value}
                 onClick={() => onChange(o.value)}
-                className={`rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${value === o.value ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink'
-                    }`}
+                className={`rounded-full px-3.5 py-1 text-xs font-bold transition-all ${
+                    value === o.value ? 'brand-btn text-white shadow-sm' : 'text-muted hover:text-ink'
+                }`}
             >
                 {o.label}
             </button>
@@ -213,29 +214,37 @@ const Segmented: React.FC<{
     </div>
 );
 
-/** A strip of headline numbers divided by hairlines instead of separate cards. */
+/** Elevated glass metric cards matching reference site's .metrics-grid */
 const StatStrip: React.FC<{ items: { label: string; value: string; hint?: string }[]; loading?: boolean }> = ({
     items,
     loading
 }) => (
-    <dl className="grid grid-cols-2 gap-y-6 border-y border-line py-5 lg:grid-cols-4 lg:gap-y-0">
-        {items.map((it, i) => (
-            <div key={it.label} className={`px-1 lg:px-6 ${i > 0 ? 'lg:border-l lg:border-line' : 'lg:pl-0'}`}>
-                <dt className="text-[13px] text-muted">{it.label}</dt>
-                <dd className="mt-1 text-[28px] font-semibold leading-none tracking-tight tabular-nums text-ink">
-                    {loading ? <span className="inline-block h-7 w-16 animate-pulse rounded bg-surface-2" /> : it.value}
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((it) => (
+            <div
+                key={it.label}
+                className="glass-card rounded-2xl border border-[var(--border-glass)] bg-surface/85 p-5 backdrop-blur-xl shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            >
+                <dt className="text-xs font-bold uppercase tracking-wider text-muted">{it.label}</dt>
+                <dd className="mt-2 text-3xl font-extrabold tracking-tight tabular-nums brand-gradient-text">
+                    {loading ? <span className="inline-block h-8 w-24 animate-pulse rounded-lg bg-surface-3" /> : it.value}
                 </dd>
-                {it.hint && <p className="mt-1.5 truncate text-[13px] text-muted">{it.hint}</p>}
+                {it.hint && (
+                    <p className="mt-2 text-xs font-medium text-muted flex items-center gap-1.5 truncate">
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                        <span className="truncate">{it.hint}</span>
+                    </p>
+                )}
             </div>
         ))}
-    </dl>
+    </div>
 );
 
 const SectionHead: React.FC<{ title: string; sub?: string; right?: React.ReactNode }> = ({ title, sub, right }) => (
     <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div className="max-w-2xl">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">{title}</h2>
-            {sub && <p className="mt-1 text-sm leading-relaxed text-muted">{sub}</p>}
+            <h2 className="text-xl font-bold tracking-tight text-ink">{title}</h2>
+            {sub && <p className="mt-1 text-xs sm:text-sm leading-relaxed text-muted">{sub}</p>}
         </div>
         {right}
     </div>
@@ -245,7 +254,7 @@ const RouteLabel: React.FC<{ route: string }> = ({ route }) => {
     const r = ROUTE[route as RouteKey];
     if (!r) return <span className="text-ink-2">{route}</span>;
     return (
-        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[13px] font-medium ${r.chip}`}>
+        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold backdrop-blur-sm ${r.chip}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${r.dot}`} />
             {r.label}
         </span>
@@ -253,9 +262,9 @@ const RouteLabel: React.FC<{ route: string }> = ({ route }) => {
 };
 
 const EmptyNote: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-    <div className="rounded-xl border border-dashed border-line-strong px-5 py-6">
-        <p className="text-sm font-semibold text-ink">{title}</p>
-        <p className="mt-1 text-sm text-muted">{children}</p>
+    <div className="rounded-2xl border border-dashed border-line-strong bg-surface/60 p-6 text-center backdrop-blur-sm">
+        <p className="text-sm font-bold text-ink">{title}</p>
+        <p className="mt-1 text-xs text-muted">{children}</p>
     </div>
 );
 
@@ -315,9 +324,9 @@ const BenchmarkDatasetView: React.FC<{ d: BenchmarkDataset; metric: Metric }> = 
                             <span className={`truncate text-sm ${isBest ? 'font-semibold text-ink' : 'text-ink-2'}`} title={s.name}>
                                 {s.name}
                             </span>
-                            <span className="h-3 overflow-hidden rounded-full bg-surface-2">
+                            <span className="h-3 overflow-hidden rounded-full bg-surface-3">
                                 <span
-                                    className={`block h-full rounded-full transition-[width] duration-500 ${isBest ? 'bg-ink' : 'bg-line-strong'}`}
+                                    className={`block h-full rounded-full transition-[width] duration-500 ${isBest ? 'brand-btn' : 'bg-line-strong'}`}
                                     style={{ width: `${Math.max(v * 100, 0.8)}%` }}
                                 />
                             </span>
@@ -491,8 +500,8 @@ const CompareBar: React.FC<{ label: string; value: number; strong?: boolean; sub
             {label}
             {sub && <span className="block text-[12px] font-normal text-muted">{sub}</span>}
         </span>
-        <span className="h-3 overflow-hidden rounded-full bg-surface-2">
-            <span className={`block h-full rounded-full ${strong ? 'bg-ink' : 'bg-line-strong'}`} style={{ width: `${value * 100}%` }} />
+        <span className="h-3 overflow-hidden rounded-full bg-surface-3">
+            <span className={`block h-full rounded-full ${strong ? 'brand-btn' : 'bg-line-strong'}`} style={{ width: `${value * 100}%` }} />
         </span>
         <span className={`text-right text-sm tabular-nums ${strong ? 'font-semibold text-ink' : 'text-muted'}`}>{pct(value)}</span>
     </div>
@@ -786,48 +795,57 @@ export const EfficiencyChunksPage: React.FC<Props> = ({ apiBase = '' }) => {
     ];
 
     return (
-        <div className="min-h-full bg-bg">
+        <div className="min-h-full bg-transparent">
             {/* Page title */}
-            <div className="mx-auto max-w-5xl px-5 pt-7 sm:px-8">
+            <div className="mx-auto max-w-5xl px-5 pt-8 sm:px-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="max-w-2xl">
-                        <h1 className="text-[28px] font-semibold tracking-tight text-ink">Efficiency and chunks</h1>
-                        <p className="mt-1 text-sm leading-relaxed text-muted">
-                            How well retrieval and routing work, how your documents were split, and what each question cost. Every
-                            number comes from your own database, query logs and benchmark runs.
+                        <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-2">
+                            Telemetry & Benchmarking
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight brand-gradient-text">Efficiency & Chunks</h1>
+                        <p className="mt-2 text-sm leading-relaxed text-muted">
+                            Empirical retrieval accuracy, routing latency distribution, token usage, and live corpus chunk stats.
                         </p>
                     </div>
                     <button
                         onClick={refresh}
-                        className="flex items-center gap-2 rounded-lg border border-line-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-ink transition-colors hover:bg-surface-2"
+                        className="brand-btn flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold text-white shadow-md transition-all hover:scale-105 active:scale-95"
                     >
                         <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
-                        Refresh
+                        Refresh Data
                     </button>
                 </div>
             </div>
 
-            {/* Tabs stay visible while scrolling */}
-            <div className="sticky top-0 z-10 mt-5 border-b border-line bg-bg">
-                <nav className="mx-auto flex max-w-5xl gap-1 px-5 pt-1 sm:px-8" aria-label="Sections">
-                    {tabs.map(t => (
-                        <button
-                            key={t.key}
-                            onClick={() => setTab(t.key)}
-                            aria-current={tab === t.key ? 'page' : undefined}
-                            className={`relative px-3 pb-3 pt-2 text-sm font-medium transition-colors ${tab === t.key ? 'text-ink' : 'text-muted hover:text-ink'
-                                }`}
-                        >
-                            {t.label}
-                            {tab === t.key && <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-ink" />}
-                        </button>
-                    ))}
+            {/* Tabs stay visible while scrolling (Pill Navbar matching reference site) */}
+            <div className="sticky top-0 z-20 mt-6 border-b border-line/60 bg-surface/85 backdrop-blur-md">
+                <nav className="mx-auto flex max-w-5xl gap-1 px-5 py-2.5 sm:px-8" aria-label="Sections">
+                    <div className="flex items-center gap-1 rounded-full border border-line-strong bg-surface-2/80 p-1 shadow-inner backdrop-blur-sm">
+                        {tabs.map(t => {
+                            const active = tab === t.key;
+                            return (
+                                <button
+                                    key={t.key}
+                                    onClick={() => setTab(t.key)}
+                                    aria-current={active ? 'page' : undefined}
+                                    className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all whitespace-nowrap ${
+                                        active
+                                            ? 'brand-btn text-white shadow-md'
+                                            : 'text-muted hover:text-ink hover:bg-surface-3/50'
+                                    }`}
+                                >
+                                    {t.label}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </nav>
             </div>
 
             <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 sm:py-10">
                 {error && (
-                    <div role="alert" className="mb-8 flex items-start gap-3 rounded-xl bg-bad-bg px-4 py-3 text-sm text-bad">
+                    <div role="alert" className="mb-8 flex items-start gap-3 rounded-2xl border border-bad/30 bg-bad-bg/80 backdrop-blur-md px-4 py-3 text-sm text-bad shadow-sm">
                         <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
                         <span>{error}</span>
                     </div>
@@ -835,20 +853,27 @@ export const EfficiencyChunksPage: React.FC<Props> = ({ apiBase = '' }) => {
 
                 {/* ============================ RESULTS ============================ */}
                 {tab === 'results' && (
-                    <div className="space-y-16">
-                        <BenchmarkSection benchmark={eff?.benchmark} />
-                        <div className="border-t border-line pt-12">
+                    <div className="space-y-10">
+                        <div className="glass-card rounded-3xl border border-[var(--border-glass)] bg-surface/85 p-6 sm:p-8 backdrop-blur-xl shadow-sm">
+                            <BenchmarkSection benchmark={eff?.benchmark} />
+                        </div>
+                        <div className="glass-card rounded-3xl border border-[var(--border-glass)] bg-surface/85 p-6 sm:p-8 backdrop-blur-xl shadow-sm">
                             <RouterSection data={eff?.router_eval} />
                         </div>
                     </div>
                 )}
 
                 {/* ============================ LIVE USAGE ============================ */}
-                {tab === 'usage' && <UsageTab eff={eff} loading={loading} />}
+                {tab === 'usage' && (
+                    <div className="glass-card rounded-3xl border border-[var(--border-glass)] bg-surface/85 p-6 sm:p-8 backdrop-blur-xl shadow-sm">
+                        <UsageTab eff={eff} loading={loading} />
+                    </div>
+                )}
 
                 {/* ============================ CHUNKS ============================ */}
                 {tab === 'chunks' && (
-                    <div className="space-y-12">
+                    <div className="glass-card rounded-3xl border border-[var(--border-glass)] bg-surface/85 p-6 sm:p-8 backdrop-blur-xl shadow-sm">
+                        <div className="space-y-12">
                         <StatStrip
                             loading={loading && !stats}
                             items={[
@@ -1042,8 +1067,9 @@ export const EfficiencyChunksPage: React.FC<Props> = ({ apiBase = '' }) => {
                             )}
                         </section>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
-    );
+    </div>
+);
 };
